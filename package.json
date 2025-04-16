@@ -1,0 +1,26 @@
+{
+  "name": "live-dashboard",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "install-all": "npm-run-all --parallel install:client install:server",
+    "install:client": "cd client && npm install",
+    "install:server": "cd server && npm install",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "client": "cd client && npm start",
+    "server": "cd server && node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "npm-run-all": "^4.1.5"
+  },
+  "dependencies": {
+    "axios": "^1.8.4",
+    "csv-parser": "^3.2.0",
+    "mysql2": "^3.14.0"
+  }
+}
