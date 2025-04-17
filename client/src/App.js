@@ -54,7 +54,7 @@ function App() {
  // useEffect - Fetch data for the selected indicator //
   useEffect(() => {
     // fetch filtered rows for the selected indicator from Express API
-    fetch(`http://localhost:5001/api/railway/indicator/${selectedIndicatorId}`)
+    fetch(`http://fingertips-production-ca6d.up.railway.app/api/railway/indicator/${selectedIndicatorId}`)
       .then(res => res.json())
       .then(json => {
         console.log(`Fetched data for indicator ${selectedIndicatorId}:`, json);
