@@ -171,7 +171,7 @@ useEffect(() => {
 
   return (
     <div>
-      {/* Table of fetched data */}
+      {/* 
       <h2>Raw Data Table</h2>
       <table style={{ borderCollapse: 'collapse', width: '100%', marginBottom: '30px' }}>
         <thead>

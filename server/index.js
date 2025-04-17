@@ -10,7 +10,7 @@ app.use(cors());
 
 const PORT = 5001;
 
-// London indicator data: Early access to maternity care (Indicator ID 93583)
+
 app.get('/api/fingertips', async (req, res) => {
   try {
 
@@ -51,8 +51,8 @@ app.get('/api/resources', (req, res) => {
   `);
 });
 
-// GET /api/data - return all indicators
-app.get('/api/data', (req, res) => {
+// GET /api/data/railway - return all indicators - SOURCE: MySQL (Railway) via Express backend //
+app.get('/api/data/railway', (req, res) => {
 
 
   // error handling (so server stops crashing every time there's a database issue)
@@ -66,8 +66,8 @@ app.get('/api/data', (req, res) => {
   });
 });
 
-// Debug route - count rows in the indicators table
-app.get('/api/debug-count', (req, res) => {
+// Debug route - count rows in the indicators table - SOURCE: MySQL (Railway) via Express backend //
+app.get('/api/railway/debug-count', (req, res) => {
   connection.query('SELECT COUNT(*) AS count FROM indicators', (err, results) => {
     if (err) {
       console.error('❌ Query error:', err.message);
@@ -77,8 +77,8 @@ app.get('/api/debug-count', (req, res) => {
   });
 });
 
-// London: Early Access to Maternity Care (Indicator 94121)
-app.get('/api/early-access', (req, res) => {
+// London: Early Access to Maternity Care (Indicator 94121) - SOURCE: MySQL (Railway) via Express backend // 
+app.get('/api/railway/early-access', (req, res) => {
   // "hard‑code" the 32 London borough codes
   const boroughCodes = [
     'E09000002','E09000003','E09000004','E09000005','E09000006','E09000007',
