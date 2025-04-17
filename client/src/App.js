@@ -1,49 +1,73 @@
-// React App //
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'; // not currently being used? //
 import LondonMap from './components/london.map.experimental';
 
-function App() {
-  // useState 3 - holds the Early Access to Maternity Care rows //
-  const [dbDataEarlyAccess, setdbDataEarlyAccess] = useState(null);
 
-  // tracks sort direction // 
-  const [dbDataEarlyAccessSorted, setdbDataEarlyAccessSorted] = useState(null);
+const indicatorList = [
+  { id: '90731', name: 'Low Birth Weight (alt method)', unit: ' per 1,000', rows: 768 },
+  { id: '20401', name: 'Under 18s conception rate', unit: ' per 1,000', rows: 768 }, // note - this data is hidden in some places - consider ethical implications
+  { id: '92530', name: 'Stillbirth rate', unit: ' per 1,000', rows: 672 },
+  { id: '20101', name: 'Low birth weight of term babies', unit: '%', rows: 546 },
+  { id: '90740', name: 'Ectopic pregnancy admissions rate', unit: ' per 100,000', rows: 512 }, // note - this data is hidden in some places - consider ethical implications
+  { id: '91743', name: 'Premature births (less than 37 weeks gestation)', unit: ' per 1,000', rows: 454 },
+  { id: '91458', name: 'Under 18s births rate', unit: ' per 1,000', rows: 448 }, // note - this data is hidden in some places - consider ethical implications 
+  { id: '93085', name: 'Smoking status at time of delivery', unit: '%', rows: 448 },
+  { id: '92266', name: 'General fertility rate', unit: ' per 1,000', rows: 417 },
+  { id: '92532', name: 'Very low birth weight of all babies', unit: '%', rows: 416 },
+  { id: '92531', name: 'Low birth weight of all babies', unit: '%', rows: 416 },
+  { id: '92552', name: 'Multiple births', unit: ' per 1,000', rows: 416 },
+  { id: '90811', name: 'Teenage mothers', unit: '%', rows: 322 },
+  { id: '92973', name: 'Percentage of deliveries to women from ethnic minority groups', unit: '%', rows: 320 },
+  { id: '92244', name: 'Caesarean section %', unit: '%', rows: 320 },
+  { id: '92240', name: 'Admissions of babies under 14 days', unit: ' per 1,000', rows: 320 },
+  { id: '94121', name: 'Early Access to Maternity Care', unit: '%', rows: 160 },
+  { id: '93932', name: "Baby's first feed breastmilk", unit: '%', rows: 140 },  // note - this data is hidden in some places - reason unclear
+];
+
+function App() {
+  // useState - holds the Early Access to Maternity Care rows //
+  const [indicatorData, setIndicatorData] = useState(null);
+
+  // useState - tracks sort direction // 
+  const [sortedIndicatorData, setSortedIndicatorData] = useState(null);
   const [sortAsc, setSortAsc] = useState(true); // true = ascending
 
-  // function to sort data //
+  // use state - tracks current indicator //
+  const [selectedIndicatorId, setSelectedIndicatorId] = useState('94121');
+
+  // js function to sort data //
   const sortByValue = () => {
-    if (!dbDataEarlyAccess || !dbDataEarlyAccess.rows) return;
+    if (!indicatorData || !indicatorData.rows) return;
   
-    const sortedRows = [...dbDataEarlyAccess.rows].sort((a, b) =>
+    const sortedRows = [...indicatorData.rows].sort((a, b) =>
       sortAsc ? a.value - b.value : b.value - a.value
     );
   
-    setdbDataEarlyAccessSorted({
-      title: dbDataEarlyAccess.title,
+    setSortedIndicatorData({
+      title: indicatorData.title,
       rows: sortedRows
     });
   
     setSortAsc(!sortAsc); // ascending --> flip order = descending //
   };
 
- // useEffect 3 - Early Access to Maternity Care //
+ // useEffect - Fetch data for the selected indicator //
   useEffect(() => {
-    // fetch FILTERED “Early Access” rows from Express API
-    fetch('http://localhost:5001/api/railway/early-access')
+    // fetch filtered rows for the selected indicator from Express API
+    fetch(`http://localhost:5001/api/railway/indicator/${selectedIndicatorId}`)
       .then(res => res.json())
       .then(json => {
-        console.log('Fetched early‑access data:', json);
-        setdbDataEarlyAccess(json);
+        console.log(`Fetched data for indicator ${selectedIndicatorId}:`, json);
+        setIndicatorData(json);
+        setSortedIndicatorData(null); // reset sorting
       })
       .catch(err => {
-        console.error('Error fetching early‑access data:', err);
+        console.error(`Error fetching data for indicator ${selectedIndicatorId}:`, err);
       });
-  }, []);
+  }, [selectedIndicatorId]);
 
   // loading screen //
-  if (!dbDataEarlyAccess) {
+  if (!indicatorData) {
     return (
       <div style={{ padding: '40px', textAlign: 'center' }}>
         <h2 style={{ color: '#444' }}>Loading data…</h2>
@@ -53,37 +77,79 @@ function App() {
   
   // content //
   return (
-    <div style={{ padding: '20px' }}>
+    <div style={{ padding: '20px' }}>  
 
       <h1>London Perinatal Health Data</h1>
-      
-        {/* JSX Table 3 – Early Access to Maternity Care */}
-        <h2>{dbDataEarlyAccess.title}</h2>
-        <table border="1" cellPadding="8" style={{ borderCollapse: 'collapse', marginBottom: '30px' }}>
-        <thead>
-          {/* Column headers (Table 3) */}
-          <tr>
-            <th>Borough</th>
-            <th style={{ cursor: 'pointer' }} onClick={sortByValue}>
-              Percentage {sortAsc ? '↑' : '↓'}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {(dbDataEarlyAccessSorted ? dbDataEarlyAccessSorted.rows : dbDataEarlyAccess.rows).map((row) => (
-            <tr key={row.area_name}>
-                    <td>
-                      {row.area_name === 'Hackney'
-                        ? 'Hackney (including City of London)' // if true (Hackney only) //
-                        : row.area_name}  {/* if false (all other boroughs) */}
-      </td>
-              <td>{Math.round(row.value)}%</td>
-            </tr>
-           ))}
-       </tbody>
-       </table>
 
-       <LondonMap dbDataEarlyAccess={dbDataEarlyAccess.rows} />
+      <div>  {/* Indicator Selector */} 
+        <label htmlFor="indicator-select">Select an indicator: </label>
+        <select
+          id="indicator-select"
+          value={selectedIndicatorId}
+          onChange={(e) => setSelectedIndicatorId(e.target.value)}
+        >
+          {indicatorList.map((indicator) => (
+            <option key={indicator.id} value={indicator.id}>
+              {indicator.name}
+            </option>
+          ))}
+        </select>
+      </div>  {/* End of Indicator Selector */} 
+    
+      
+      <div uk-grid >
+      
+        <div class="uk-width-1-1@s uk-width-1-2@m">
+
+          {/* Table Title*/} 
+          <h2> 
+            {
+              `${indicatorList.find((item) => item.id === selectedIndicatorId)?.name || 'Selected Indicator'}, ${indicatorData.title.split(', ')[1]}`
+            }
+          </h2>
+          {/* Table */} 
+          <table border="1" cellPadding="8" style={{ borderCollapse: 'collapse', marginBottom: '30px' }}>
+            <thead>
+              <tr>
+                <th>Borough</th>
+                <th style={{ cursor: 'pointer' }} onClick={sortByValue}>
+                  Value {sortAsc ? '↑' : '↓'}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {(sortedIndicatorData ? sortedIndicatorData.rows : indicatorData.rows).map((row) => (
+                <tr key={row.area_name}>
+                  <td>
+                    {row.area_name === 'Hackney'
+                      ? 'Hackney (including City of London)'
+                      : row.area_name}
+                  </td>
+                  <td>
+                    {typeof row.value === 'number'
+                      ? `${row.value.toFixed(1)}${indicatorList.find(i => i.id === selectedIndicatorId)?.unit || ''}`
+                      : 'no data'}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>  {/* End of Table */} 
+        </div>  {/* End of div class */} 
+      
+        <div class="uk-width-1-1@s uk-width-1-2@m">
+            <h2>
+              {
+                `${indicatorList.find((item) => item.id === selectedIndicatorId)?.name || 'Selected Indicator'}, ${indicatorData.title.split(', ')[1]} – Map`
+              }
+            </h2>
+            
+            <LondonMap indicatorData={indicatorData.rows} />
+        </div>
+      </div> 
+
+            <p> 
+              Source: <a href="https://www.gov.uk/government/organisations/office-for-health-improvement-and-disparities">Office for Health Improvement and Disparities</a> -  <a href="https://fingertips.phe.org.uk/">Public Health Profiles</a>, via <a href="https://fingertips.phe.org.uk/api">Fingertips API</a>
+            </p>
 
     </div>
   );

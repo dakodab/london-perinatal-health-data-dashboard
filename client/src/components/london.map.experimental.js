@@ -1,11 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3';
 
-const LondonMap = ({ dbDataEarlyAccess }) => {
+const LondonMap = ({ indicatorData }) => {
   const londonMapRef = useRef(); // svgref - London map
 
   useEffect(() => {
-    if (!dbDataEarlyAccess) return;
+    if (!indicatorData) return;
 
     let tooltip = d3.select('#tooltip');
     if (tooltip.empty()) {
@@ -29,8 +29,8 @@ const LondonMap = ({ dbDataEarlyAccess }) => {
       
       // lookup table from d.area_name to d.value //
       const valueMap = new Map(
-        dbDataEarlyAccess.flatMap(d => {
-          //city of london fix again//
+          indicatorData.flatMap(d => {
+          // city of london fix agaaaaaiiin //
           if (d.area_name === 'Hackney') {
             return [
               ['Hackney', d.value],
@@ -44,10 +44,10 @@ const LondonMap = ({ dbDataEarlyAccess }) => {
       );
       // Color scale for choropleth shading, based on .value field from MySQL //
 
-      console.log('Color domain:', d3.extent(dbDataEarlyAccess, d => d.value));
+      console.log('Color domain:', d3.extent(indicatorData, d => d.value));
 
       const colorScale = d3.scaleSequential()
-      .domain(d3.extent(dbDataEarlyAccess, d => d.value))// [min, max]
+        .domain(d3.extent(indicatorData, d => d.value))// [min, max]
         .interpolator(d3.interpolateBlues); // or interpolateYlGnBu, etc.
 
       // Filter features to include only London boroughs (LAD24CD starts with 'E09') //
@@ -90,7 +90,7 @@ const LondonMap = ({ dbDataEarlyAccess }) => {
           const isCity = name === 'City of London';
           const displayName = (isHackney) ? 'Hackney (combined with City of London)' : (isCity) ? 'City of London (combined with Hackney)' : name;
           const value = valueMap.get(displayName);
-          const formattedValue = value != null ? `${Math.round(value)}%` : 'No data';
+          const formattedValue = typeof value === 'number' ? `${value.toFixed(1)}` : 'No data';
 
           tooltip
             .style('visibility', 'visible')
@@ -103,16 +103,15 @@ const LondonMap = ({ dbDataEarlyAccess }) => {
         })
         .on('mouseout', function () {
           tooltip.style('visibility', 'hidden');
-        });   // END OF LONDON MAP ONLY // 
+        }); 
 
     }); // end of d3.json block (draws maps) //
 
-  }, [dbDataEarlyAccess]); // end of if data then use effect // 
+  }, [indicatorData]); // end of if data then use effect //
 
   return (
     <div>
       {/* London map */}
-      <h2 style={{ marginTop: '40px' }}>Map of London Boroughs</h2>
       <svg
         ref={londonMapRef}
         width="500"
