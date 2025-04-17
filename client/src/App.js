@@ -77,7 +77,7 @@ function App() {
   
   // content //
   return (
-    <div style={{ padding: '20px' }}>  
+    <div style={{ padding: '50px' }}>  
 
       <h1>London Perinatal Health Data</h1>
 
