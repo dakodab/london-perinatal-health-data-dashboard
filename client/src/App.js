@@ -36,6 +36,9 @@ function App() {
   // use state - tracks current indicator //
   const [selectedIndicatorId, setSelectedIndicatorId] = useState('94121');
 
+  // use state - whats active
+  const [activeSidebarItem, setActiveSidebarItem] = useState('ByBoroughRecent'); // default to one
+
   // js function to sort data //
   const sortByValue = () => {
     if (!indicatorData || !indicatorData.rows) return;
@@ -79,110 +82,163 @@ function App() {
   // content //
   return (
     <div className="container-scroller" style={{ paddingBottom: '100px' }}>
+      {/* Top Navbar */}
+      <nav className="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div className="navbar-brand-wrapper d-flex align-items-center justify-content-center">
+          <a className="navbar-brand brand-logo" href="/">London Perinatal</a>
+        </div>
+      </nav>
+
+      {/* Sidebar + Main Content */}
       <div className="container-fluid page-body-wrapper">
-        <div className="main-panel">
-          <div className="content-wrapper">
-
-            {/* Row 1: Title */}
-            <div className="row mb-4">
-              <div className="col">
-                <h1 className="fw-bold">London Perinatal Health Data</h1>
-              </div>
-            </div>
-
-            {/* Row 2: Indicator selector */}
-            <div className="row mb-4">
-              <div className="col-md-6">
-                <label htmlFor="indicator-select" className="form-label">Select an indicator:</label>
-                <select
-                  id="indicator-select"
-                  className="form-select text-dark"
-                  value={selectedIndicatorId}
-                  onChange={(e) => setSelectedIndicatorId(e.target.value)}
+        {/* Sidebar */}
+          <nav className="sidebar sidebar-offcanvas" id="sidebar">
+            <ul className="nav">
+              <li className="nav-item nav-category">Most Recent Data</li>
+              <li className="nav-item">
+                <a
+                  className={`nav-link ${activeSidebarItem === 'CitywideRecent' ? 'active' : ''}`}
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); setActiveSidebarItem('CitywideRecent'); }}
                 >
-                  {indicatorList.map((indicator) => (
-                    <option key={indicator.id} value={indicator.id}>
-                      {indicator.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            {/* Row 3: Table + Map side by side */}
-            <div className="row">
-
-              {/* TABLE - Column 1 */}
-              <div className="col-md-6">
-
-                 {/* Outer white card container for map panel */}
-                 <div className="w-100 p-3 bg-white rounded shadow-sm">               
-
-                  {/* Table Title*/}
-                  <h2>
-                    {
-                      `${indicatorList.find((item) => item.id === selectedIndicatorId)?.name || 'Selected Indicator'} by Borough, ${indicatorData.title.split(', ')[1]} - Table`
-                    }
-                  </h2>
-
-                  {/* Table Content */}
-                  <IndicatorTable
-                    data={indicatorData}
-                    sortedData={sortedIndicatorData}
-                    sortAsc={sortAsc}
-                    sortByValue={sortByValue}
-                    selectedIndicatorId={selectedIndicatorId}
-                    indicatorList={indicatorList}
-                  />
-                </div>
-              </div> {/* End of TABLE - Column 1 */}
-
-
-              {/* MAP LondonMap - Column 2*/}
-              <div className="col-md-6 d-flex justify-content-center">
-                {/* Outer white card container for map panel */}
-                <div className="w-100 p-3 bg-white rounded shadow-sm">
-                  {/* LondonMap Title */}
-                  <h2 className="mb-3">
-                    {
-                      `${indicatorList.find((item) => item.id === selectedIndicatorId)?.name || 'Selected Indicator'} by Borough, ${indicatorData.title.split(',')[1]} – Map`
-                    }
-                  </h2>
-
-                  {/* LondonMap Content */}
-                  {/* fix off centerness */}
-                  <div style={{ maxWidth: '100%', width: '100%', display: 'flex', justifyContent: 'center' }}>
-                    <LondonMap
-                      indicatorData={indicatorData.rows}
-                      unit={
-                        indicatorList.find(i => i.id === selectedIndicatorId)?.unit || ''
-                      }
-                    />
-                  </div> {/* End of fix off centerness */}
-                </div> {/* Outer white card container for map panel */}
-              </div> {/* End of MAP Column 2 */}
-
-            </div> {/* End of Row 3: Table + Map side by side */}
-
-
-
-            {/* Row 4: Footer */}
-            <footer className="footer-sticky">
-              <p className="mb-0 text-muted small">
-                <b>Source: </b>
-                <a href="https://www.gov.uk/government/organisations/office-for-health-improvement-and-disparities" target="_blank" rel="noopener noreferrer" className="ms-1">
-                  Office for Health Improvement and Disparities
-                </a> – 
-                <a href="https://fingertips.phe.org.uk/" target="_blank" rel="noopener noreferrer" className="ms-1">
-                  Public Health Profiles
-                </a>, via 
-                <a href="https://fingertips.phe.org.uk/api" target="_blank" rel="noopener noreferrer" className="ms-1">
-                  Fingertips API
+                  <span className="menu-title">Citywide</span>
                 </a>
-              </p>
-            </footer>
+              </li>
+              <li className="nav-item">
+                <a
+                  className={`nav-link ${activeSidebarItem === 'ByBoroughRecent' ? 'active' : ''}`}
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); setActiveSidebarItem('ByBoroughRecent'); }}
+                >
+                  <span className="menu-title">By Borough</span>
+                </a>
+              </li>
+              <li className="nav-item nav-category">Data Over Time</li>
+              <li className="nav-item">
+                <a
+                  className={`nav-link ${activeSidebarItem === 'CitywideTime' ? 'active' : ''}`}
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); setActiveSidebarItem('CitywideTime'); }}
+                >
+                  <span className="menu-title">Citywide</span>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className={`nav-link ${activeSidebarItem === 'ByBoroughTime' ? 'active' : ''}`}
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); setActiveSidebarItem('ByBoroughTime'); }}
+                >
+                  <span className="menu-title">By Borough</span>
+                </a>
+              </li>
+            </ul>
+        </nav>
 
+      {/* Main Panel */}
+        <div className="main-panel">
+          <div className="content-wrapper p-4">
+
+            {/* Conditional content based on sidebar selection */}
+            {activeSidebarItem === 'ByBoroughRecent' && (
+              <>
+                {/* Row: Indicator Selector */}
+                <div className="row mb-4">
+                  <div className="col-md-6">
+                    <label htmlFor="indicator-select" className="form-label">Select an indicator:</label>
+                    <select
+                      id="indicator-select"
+                      className="form-select text-dark"
+                      value={selectedIndicatorId}
+                      onChange={(e) => setSelectedIndicatorId(e.target.value)}
+                    >
+                      {indicatorList.map((indicator) => (
+                        <option key={indicator.id} value={indicator.id}>
+                          {indicator.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                {/* Row: Table + Map side by side */}
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="w-100 p-3 bg-white rounded shadow-sm">
+                      <h2 className="mb-3">Table</h2>
+                      <IndicatorTable
+                        data={indicatorData}
+                        sortedData={sortedIndicatorData}
+                        sortAsc={sortAsc}
+                        sortByValue={sortByValue}
+                        selectedIndicatorId={selectedIndicatorId}
+                        indicatorList={indicatorList}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-md-6 d-flex justify-content-center">
+                    <div className="w-100 p-3 bg-white rounded shadow-sm">
+                      <h2 className="mb-3">Map</h2>
+                      <div style={{ maxWidth: '100%', display: 'flex', justifyContent: 'center' }}>
+                        <LondonMap
+                          indicatorData={indicatorData.rows}
+                          unit={indicatorList.find(i => i.id === selectedIndicatorId)?.unit || ''}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+
+            {activeSidebarItem === 'CitywideRecent' && (
+              <div className="row">
+                <div className="col">
+                  <div className="w-100 p-3 bg-white rounded shadow-sm">
+                    <h2 className="mb-3">Citywide – Most Recent</h2>
+                    <p className="text-muted">This section will show the most recent citywide data soon.</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeSidebarItem === 'CitywideTime' && (
+              <div className="row">
+                <div className="col">
+                  <div className="w-100 p-3 bg-white rounded shadow-sm">
+                    <h2 className="mb-3">Citywide – Over Time</h2>
+                    <p className="text-muted">This section will show citywide data over time soon.</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeSidebarItem === 'ByBoroughTime' && (
+              <div className="row">
+                <div className="col">
+                  <div className="w-100 p-3 bg-white rounded shadow-sm">
+                    <h2 className="mb-3">By Borough – Over Time</h2>
+                    <p className="text-muted">This section will show borough-level data over time soon.</p>
+                  </div>
+                </div>
+              </div>
+            )}
           </div> {/* end content-wrapper */}
+
+          {/* Row 4: Footer */}
+          {/* partial:../../partials/_footer.html */}
+          <footer class="footer">
+            <div class="d-sm-flex justify-content-center justify-content-sm-between">
+              <span class="text-muted text-center text-sm-left d-block d-sm-inline-block"><b>Source: </b> 
+                <a href="https://www.gov.uk/government/organisations/office-for-health-improvement-and-disparities" target="_blank">Office for Health Improvement and Disparities</a> 
+                {" "}–{" "}
+                <a href="https://fingertips.phe.org.uk/" target="_blank">Public Health Profiles</a>
+                , via{" "}
+                <a href="https://fingertips.phe.org.uk/api" target="_blank">Fingertips API </a>
+                  </span>
+              <span class="float-none float-sm-end d-block mt-1 mt-sm-0 text-center"></span>
+            </div>
+          </footer>
         </div> {/* end main-panel */}
       </div> {/* end page-body-wrapper */}
     </div>
