@@ -3,11 +3,11 @@ import React from 'react';
 const IndicatorTable = ({ data, sortedData, sortAsc, sortByValue, selectedIndicatorId, indicatorList }) => {
   return (
     <>
-      <table border="1" cellPadding="8" style={{ borderCollapse: 'collapse', marginBottom: '30px' }}>
+      <table className="table table-bordered sortable-table mb-4">
         <thead>
           <tr>
             <th>Borough</th>
-            <th style={{ cursor: 'pointer' }} onClick={sortByValue}>
+            <th style={{ cursor: 'pointer', userSelect: 'none' }} onClick={sortByValue}>
               Value {sortAsc ? '↑' : '↓'}
             </th>
           </tr>
