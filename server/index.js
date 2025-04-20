@@ -1,7 +1,6 @@
 require('dotenv').config(); // load .env first
 const connection = require('./db'); // db connection after .env is loaded
 const mysql = require('mysql2');
-const path = require('path');
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
