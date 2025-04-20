@@ -17,39 +17,39 @@ function Layout({ children }) {
         {/* Sidebar Navigation List */}
         <ul className="nav flex-column">
           
-          {/* First main section - "Most Recent Data" */}
-          <li className="nav-item">
-            <a className="nav-link active" href="#recent">
-              Most Recent Data
-            </a>
+            {/* Most Recent Data - non-clickable section title */}
+            <li className="nav-item mt-4">
+              <div className="text-uppercase fw-bold small text-muted">
+                Most Recent Data
+              </div>
 
-            {/* Sub-links indented using Bootstrap margin start (ms-3) */}
-            <ul className="nav flex-column ms-3">
-              <li className="nav-item">
-                <a className="nav-link" href="#city">Citywide</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#borough">By Borough</a>
-              </li>
-            </ul>
-          </li>
+              {/* Sub-links indented using Bootstrap margin start (ms-3) */}
+              <ul className="nav flex-column ms-3">
+                <li className="nav-item">
+                  <a className="nav-link" href="#city">Citywide</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="#borough">By Borough</a>
+                </li>
+              </ul>
+            </li>
 
-          {/* Second main section - "Data Over Time" */}
-          <li className="nav-item mt-3">
-            <a className="nav-link" href="#trends">
-              Data Over Time
-            </a>
+            {/* Data Over Time - non-clickable section title */}
+            <li className="nav-item mt-4">
+              <div className="text-uppercase fw-bold small text-muted">
+                Data Over Time
+              </div>
 
-            {/* Sub-links for Citywide vs. Borough */}
-            <ul className="nav flex-column ms-3">
-              <li className="nav-item">
-                <a className="nav-link" href="#city-trends">Citywide</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#borough-trends">By Borough</a>
-              </li>
-            </ul>
-          </li>
+              {/* Sub-links for Citywide vs. Borough */}
+              <ul className="nav flex-column ms-3">
+                <li className="nav-item">
+                  <a className="nav-link" href="#city-trends">Citywide</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="#borough-trends">By Borough</a>
+                </li>
+              </ul>
+            </li>
         </ul>
       </div>
 
