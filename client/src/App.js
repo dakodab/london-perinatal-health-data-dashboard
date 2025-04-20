@@ -96,37 +96,41 @@ function App() {
             <ul className="nav">
               <li className="nav-item nav-category">Most Recent Data</li>
               <li className="nav-item">
-                <button
-                  className={`nav-link btn btn-link w-100 text-start ${activeSidebarItem === 'CitywideRecent' ? 'active' : ''}`}
-                  onClick={() => setActiveSidebarItem('CitywideRecent')}
+                <a
+                  className={`nav-link ${activeSidebarItem === 'CitywideRecent' ? 'active' : ''}`}
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); setActiveSidebarItem('CitywideRecent'); }}
                 >
                   <span className="menu-title">Citywide</span>
-                </button>
-                </li>
+                </a>
+              </li>
               <li className="nav-item">
-                <button
-                  className={`nav-link btn btn-link w-100 text-start ${activeSidebarItem === 'ByBoroughRecent' ? 'active' : ''}`}
-                  onClick={() => setActiveSidebarItem('ByBoroughRecent')}
+                <a
+                  className={`nav-link ${activeSidebarItem === 'ByBoroughRecent' ? 'active' : ''}`}
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); setActiveSidebarItem('ByBoroughRecent'); }}
                 >
                   <span className="menu-title">By Borough</span>
-                </button>
+                </a>
               </li>
               <li className="nav-item nav-category">Data Over Time</li>
               <li className="nav-item">
-                <button
-                  className={`nav-link btn btn-link w-100 text-start ${activeSidebarItem === 'CitywideTime' ? 'active' : ''}`}
-                  onClick={() => setActiveSidebarItem('CitywideTime')}
+                <a
+                  className={`nav-link ${activeSidebarItem === 'CitywideTime' ? 'active' : ''}`}
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); setActiveSidebarItem('CitywideTime'); }}
                 >
                   <span className="menu-title">Citywide</span>
-                </button>
+                </a>
               </li>
               <li className="nav-item">
-                <button
-                  className={`nav-link btn btn-link w-100 text-start ${activeSidebarItem === 'ByBoroughTime' ? 'active' : ''}`}
-                  onClick={() => setActiveSidebarItem('ByBoroughTime')}
+                <a
+                  className={`nav-link ${activeSidebarItem === 'ByBoroughTime' ? 'active' : ''}`}
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); setActiveSidebarItem('ByBoroughTime'); }}
                 >
                   <span className="menu-title">By Borough</span>
-                </button>
+                </a>
               </li>
             </ul>
         </nav>
@@ -161,11 +165,7 @@ function App() {
                 <div className="row">
                   <div className="col-md-6">
                     <div className="w-100 p-3 bg-white rounded shadow-sm">
-                      <h2>
-                        {
-                          `${indicatorList.find((item) => item.id === selectedIndicatorId)?.name || 'Selected Indicator'}, ${indicatorData.title.split(', ')[1]} – Table`
-                        }
-                      </h2>
+                      <h2 className="mb-3">Table</h2>
                       <IndicatorTable
                         data={indicatorData}
                         sortedData={sortedIndicatorData}
@@ -178,11 +178,7 @@ function App() {
                   </div>
                   <div className="col-md-6 d-flex justify-content-center">
                     <div className="w-100 p-3 bg-white rounded shadow-sm">
-                      <h2>
-                        {
-                          `${indicatorList.find((item) => item.id === selectedIndicatorId)?.name || 'Selected Indicator'}, ${indicatorData.title.split(', ')[1]} – Map`
-                        }
-                      </h2>
+                      <h2 className="mb-3">Map</h2>
                       <div style={{ maxWidth: '100%', display: 'flex', justifyContent: 'center' }}>
                         <LondonMap
                           indicatorData={indicatorData.rows}
@@ -231,16 +227,16 @@ function App() {
 
           {/* Row 4: Footer */}
           {/* partial:../../partials/_footer.html */}
-          <footer className="footer">
-            <div className="d-sm-flex justify-content-center justify-content-sm-between">
-              <span className="text-muted text-center text-sm-left d-block d-sm-inline-block"><b>Source: </b> 
-                <a href="https://www.gov.uk/government/organisations/office-for-health-improvement-and-disparities" target="_blank"rel="noreferrer">Office for Health Improvement and Disparities</a> 
+          <footer class="footer">
+            <div class="d-sm-flex justify-content-center justify-content-sm-between">
+              <span class="text-muted text-center text-sm-left d-block d-sm-inline-block"><b>Source: </b> 
+                <a href="https://www.gov.uk/government/organisations/office-for-health-improvement-and-disparities" target="_blank">Office for Health Improvement and Disparities</a> 
                 {" "}–{" "}
-                <a href="https://fingertips.phe.org.uk/" target="_blank"rel="noreferrer">Public Health Profiles</a>
+                <a href="https://fingertips.phe.org.uk/" target="_blank">Public Health Profiles</a>
                 , via{" "}
-                <a href="https://fingertips.phe.org.uk/api" target="_blank"rel="noreferrer">Fingertips API </a>
+                <a href="https://fingertips.phe.org.uk/api" target="_blank">Fingertips API </a>
                   </span>
-              <span className="float-none float-sm-end d-block mt-1 mt-sm-0 text-center"></span>
+              <span class="float-none float-sm-end d-block mt-1 mt-sm-0 text-center"></span>
             </div>
           </footer>
         </div> {/* end main-panel */}
