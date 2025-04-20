@@ -48,7 +48,7 @@ const LondonMap = ({ indicatorData, unit }) => {
 
       const colorScale = d3.scaleSequential()
         .domain([0, d3.max(indicatorData, d => d.value)]) // from 0 to max
-        .interpolator(d3.interpolateRgb("#ffffff", "#2b4eff")); // custom: white to deep blue
+        .interpolator(d3.interpolateRgb("#deebf7", "#08519c")); // custom: light blue to dark blue
 
       // Filter features to include only London boroughs (LAD24CD starts with 'E09') //
       const londonFeatures = geoData.features.filter(f =>

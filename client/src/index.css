@@ -1,4 +1,3 @@
-/* ===== Global Reset & Typography ===== */
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
@@ -6,6 +5,13 @@ body {
   background-color: #f4f5f7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h4.sidebar-title {
+  font-weight: 600;
+  font-size: 20px;
+  color: #000;
+  margin-bottom: 1rem;
 }
 
 code {
@@ -33,7 +39,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ===== Sidebar Styling ===== */
 .nav-link {
-  color: #666; /* Neutral gray by default */
+  color: #333; /* Updated to match CRM/HR styles in the example */
   font-weight: 500;
   font-size: 15px;
   padding-left: 8px;
