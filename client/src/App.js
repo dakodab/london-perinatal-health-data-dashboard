@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 // import axios from 'axios'; // not currently being used? //
 import LondonMap from './components/london.map.experimental';
 import Layout from './components/Layout';
+import MostRecentCitywide from './views/MostRecentCitywide';
 
 const indicatorList = [
   { id: '90731', name: 'Low Birth Weight (alt method)', unit: ' per 1,000', rows: 768 },
@@ -83,7 +84,8 @@ function App() {
   
   // content //
   return (
-    <Layout setActiveSection={setActiveSection}>
+  <Layout setActiveSection={setActiveSection}>
+    {activeSection === 'recent-borough' && (
       <div className="container mt-4">
         <div className="card mb-4">
           <div className="card-body">
@@ -108,9 +110,6 @@ function App() {
           <div className="col-12 col-md-6">
             <div className="card mb-4">
               <div className="card-body">
-                <h2 className="card-title">
-                  {`${indicatorList.find((item) => item.id === selectedIndicatorId)?.name || 'Selected Indicator'}, ${indicatorData.title.split(', ')[1]}`}
-                </h2>
                 <table className="table table-bordered">
                   <thead>
                     <tr>
@@ -144,9 +143,6 @@ function App() {
           <div className="col-12 col-md-6">
             <div className="card mb-4">
               <div className="card-body">
-                <h2 className="card-title">
-                  {`${indicatorList.find((item) => item.id === selectedIndicatorId)?.name || 'Selected Indicator'}, ${indicatorData.title.split(', ')[1]} – Map`}
-                </h2>
                 <LondonMap
                   indicatorData={indicatorData.rows}
                   unit={indicatorList.find(i => i.id === selectedIndicatorId)?.unit || ''}
@@ -157,10 +153,17 @@ function App() {
         </div>
 
         <p>
-          Source: <a href="https://www.gov.uk/government/organisations/office-for-health-improvement-and-disparities">Office for Health Improvement and Disparities</a> - <a href="https://fingertips.phe.org.uk/">Public Health Profiles</a>, via <a href="https://fingertips.phe.org.uk/api">Fingertips API</a>
+          Source:{' '}
+          <a href="https://www.gov.uk/government/organisations/office-for-health-improvement-and-disparities">
+            Office for Health Improvement and Disparities
+          </a>{' '}
+          -{' '}
+          <a href="https://fingertips.phe.org.uk/">Public Health Profiles</a>, via{' '}
+          <a href="https://fingertips.phe.org.uk/api">Fingertips API</a>
         </p>
       </div>
-    </Layout>
+    )}
+  </Layout>
   );
 }
 
