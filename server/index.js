@@ -164,19 +164,6 @@ app.get('/api/railway/indicator/:id', (req, res) => {
   });
 });
 
-const path = require('path');
-
-// Serve your static data (like the GeoJSON)
-app.use('/data', express.static(path.join(__dirname, '../client/public/data')));
-
-// Serve static files from React's build directory
-app.use(express.static(path.join(__dirname, '../client/build')));
-
-// Support deep links: send back index.html for anything not in /api
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-});
-
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
