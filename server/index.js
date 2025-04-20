@@ -149,11 +149,11 @@ app.get('/api/railway/indicator/:id', (req, res) => {
     ];
 
     const dataSql = `
-      SELECT area_name, value
-      FROM indicators
-      WHERE indicator_id = ?
-        AND time_period = ?
-        AND area_code IN (?)
+    SELECT area_name, value
+    FROM indicators
+    WHERE indicator_id = ?
+      AND time_period = ?
+      AND area_code IN (?)
     `;
 
     connection.query(dataSql, [indicatorId, latestTimePeriod, boroughCodes], (err, results) => {
