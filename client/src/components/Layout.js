@@ -3,7 +3,7 @@ import React from 'react'; // Import React to write a React component
 
 // Layout ("functional component")
 // "children" = react "prop"
-function Layout({ children, setActiveSection }) {
+function Layout({ children, setActiveSection, activeSection }) {
   return (
     <div className="d-flex">
       {/* Sidebar section - sticks to the left side */}
