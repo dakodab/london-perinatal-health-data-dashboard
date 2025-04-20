@@ -98,6 +98,7 @@ function App() {
         <div className="card mb-4">
           <div className="card-body">
             <div>
+              <h5 className="mb-3">{indicatorData.title}</h5>
               <label htmlFor="indicator-select">Select an indicator: </label>
               <select
                 id="indicator-select"
