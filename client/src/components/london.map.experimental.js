@@ -48,7 +48,7 @@ const LondonMap = ({ indicatorData, unit }) => {
 
       const colorScale = d3.scaleSequential()
         .domain([0, d3.max(indicatorData, d => d.value)]) // from 0 to max
-        .interpolator(d3.interpolateBlues); // or interpolateYlGnBu, etc.
+        .interpolator(d3.interpolateRgb("#ffffff", "#2b4eff")); // custom: white to deep blue
 
       // Filter features to include only London boroughs (LAD24CD starts with 'E09') //
       const londonFeatures = geoData.features.filter(f =>
@@ -127,19 +127,23 @@ const LondonMap = ({ indicatorData, unit }) => {
       ></svg> {/* London map end */}
 
       {/* London map legend */}
-      <div style={{ marginTop: '20px' }}>
-        <svg width="300" height="60">
+      <div style={{ marginTop: '20px', width: '100%' }}>
+        <svg viewBox="0 0 300 60" preserveAspectRatio="xMidYMid meet" width="100%" height="60">
           <defs>
             <linearGradient id="legendGradient">
               <stop offset="0%" stopColor="#deebf7" />
               <stop offset="100%" stopColor="#08519c" />
             </linearGradient>
           </defs>
+
+          {/* Gradient bar */}
           <rect x="10" y="10" width="280" height="20" fill="url(#legendGradient)" />
+
+          {/* Labels - they stay aligned relative to the viewBox */}
           <text x="10" y="45" fontSize="12" fill="#333">Low</text>
-          <text x="260" y="45" fontSize="12" fill="#333">High</text>
+          <text x="260" y="45" fontSize="12" fill="#333" textAnchor="end">High</text>
         </svg>
-      </div> {/* London map legend div end */}
+      </div>{/* London map legend div end */}
 
     </div> 
 
