@@ -42,12 +42,14 @@ const PORT = 5001;
 
 // railway //
 app.get('/api/data/railway', (req, res) => {
+  console.log("📡 HIT: /api/data/railway");
   // error handling (so server stops crashing every time there's a database issue)
   connection.query('SELECT * FROM indicators LIMIT 100', (err, results) => {
     if (err) {
       console.error('DB query error:', err);
       res.status(500).json({ error: 'Failed to fetch data from DB' });
     } else {
+      console.log(`✅ DB returned ${results.length} rows`);
       res.json(results);
     }
   });
@@ -55,17 +57,20 @@ app.get('/api/data/railway', (req, res) => {
 
 // Debug route - count rows in the indicators table - SOURCE: MySQL (Railway) via Express backend //
 app.get('/api/railway/debug-count', (req, res) => {
+  console.log("📡 HIT: /api/railway/debug-count");
   connection.query('SELECT COUNT(*) AS count FROM indicators', (err, results) => {
     if (err) {
       console.error('Query error:', err.message);
       return res.status(500).json({ error: 'Failed to query database' });
     }
-    res.json({ rowCount: results[0].count });
+      console.log(`✅ Row count: ${results[0].count}`);
+      res.json({ rowCount: results[0].count });
   });
 });
 
 // London: Early Access to Maternity Care (Indicator 94121) - SOURCE: MySQL (Railway) via Express backend // 
 app.get('/api/railway/early-access', (req, res) => {
+  console.log("📡 HIT: /api/railway/early-access");
   // "hard‑code" the 32 London borough codes
   const boroughCodes = [
     'E09000002','E09000003','E09000004','E09000005','E09000006','E09000007',
@@ -102,6 +107,7 @@ app.get('/api/railway/early-access', (req, res) => {
     connection.query(dataSql, [94121, latest, boroughCodes], (err, results) => {
       if (err) return res.status(500).json({ error: err.message });
       // Return both title and row data //
+      console.log(`✅ DB returned ${results.length} rows`);
       res.json({
         title: `Early Access to Maternity Care, ${latest}`,
         rows: results
@@ -112,6 +118,7 @@ app.get('/api/railway/early-access', (req, res) => {
 
 // fill-in-the-blank indicator ID
 app.get('/api/railway/indicator/:id', (req, res) => {
+  console.log("📡 HIT: /api/railway/indicator/:indicatorId");
   const indicatorId = req.params.id;
   console.log('Requested indicator:', indicatorId);
 
@@ -154,14 +161,15 @@ app.get('/api/railway/indicator/:id', (req, res) => {
         return res.status(500).json({ error: 'Database error (data query)' });
       }
 
-      console.log('📊 Rows returned:', results.length);
+      console.log('Rows returned:', results.length);
+      console.log(`✅ DB returned ${results.length} rows`);
 
 
-      console.log("Sending this data to the frontend:");
-      console.log(JSON.stringify({
-        title: `Indicator ${indicatorId}, ${latestTimePeriod}`,
-        rows: results
-      }, null, 2));
+      // console.log("Sending this data to the frontend:");
+      // console.log(JSON.stringify({
+      //   title: `Indicator ${indicatorId}, ${latestTimePeriod}`,
+      //   rows: results
+      // }, null, 2));
       res.json({
         title: `Indicator ${indicatorId}, ${latestTimePeriod}`,
         rows: results
