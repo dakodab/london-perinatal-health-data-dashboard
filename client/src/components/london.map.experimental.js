@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3';
 
-const LondonMap = ({ indicatorData }) => {
+const LondonMap = ({ indicatorData, unit }) => {
   const londonMapRef = useRef(); // svgref - London map
 
   useEffect(() => {
@@ -90,7 +90,7 @@ const LondonMap = ({ indicatorData }) => {
           const isCity = name === 'City of London';
           const displayName = (isHackney) ? 'Hackney (combined with City of London)' : (isCity) ? 'City of London (combined with Hackney)' : name;
           const value = valueMap.get(displayName);
-          const formattedValue = typeof value === 'number' ? `${value.toFixed(1)}` : 'No data';
+          const formattedValue = typeof value === 'number' ? `${value.toFixed(1)} ${unit}` : 'No data';
 
           tooltip
             .style('visibility', 'visible')

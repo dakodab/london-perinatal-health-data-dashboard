@@ -143,7 +143,10 @@ function App() {
               }
             </h2>
             
-            <LondonMap indicatorData={indicatorData.rows} />
+            <LondonMap
+              indicatorData={indicatorData.rows}
+              unit={indicatorList.find(i => i.id === selectedIndicatorId)?.unit || ''}
+            />
         </div>
       </div> 
 
