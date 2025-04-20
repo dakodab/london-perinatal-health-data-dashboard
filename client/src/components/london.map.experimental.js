@@ -114,9 +114,11 @@ const LondonMap = ({ indicatorData, unit }) => {
       {/* London map */}
       <svg
         ref={londonMapRef}
-        width="500"
-        height="500"
+        viewBox="0 0 500 500"
+        preserveAspectRatio="xMidYMid meet"
         style={{
+          width: '100%',
+          height: 'auto',
           background: '#f9f9f9',
           border: '1px solid #ccc',
           display: 'block',
