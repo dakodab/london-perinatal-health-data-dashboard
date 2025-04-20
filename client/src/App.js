@@ -86,7 +86,9 @@ function App() {
   
   // content //
   return (
-  <Layout setActiveSection={setActiveSection}>
+    <Layout
+      setActiveSection={setActiveSection}
+      activeSection={activeSection}>
     {activeSection === 'recent-city' && (
       <MostRecentCitywide />
     )}
