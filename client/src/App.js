@@ -97,9 +97,9 @@ function App() {
       </div>  {/* End of Indicator Selector */} 
     
       
-      <div uk-grid >
+      <div className="row">
       
-        <div class="uk-width-1-1@s uk-width-1-2@m">
+        <div className="col-12 col-md-6">
 
           {/* Table Title*/} 
           <h2> 
@@ -108,7 +108,7 @@ function App() {
             }
           </h2>
           {/* Table */} 
-          <table border="1" cellPadding="8" style={{ borderCollapse: 'collapse', marginBottom: '30px' }}>
+          <table className="table table-bordered" style={{ marginBottom: '30px' }}>
             <thead>
               <tr>
                 <th>Borough</th>
@@ -136,7 +136,7 @@ function App() {
           </table>  {/* End of Table */} 
         </div>  {/* End of div class */} 
       
-        <div class="uk-width-1-1@s uk-width-1-2@m">
+        <div className="col-12 col-md-6">
             <h2>
               {
                 `${indicatorList.find((item) => item.id === selectedIndicatorId)?.name || 'Selected Indicator'}, ${indicatorData.title.split(', ')[1]} – Map`
