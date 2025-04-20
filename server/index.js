@@ -7,9 +7,7 @@ const axios = require('axios');
 const cors = require('cors');
 
 const app = express();
-app.use(cors({
-  origin: 'https://london-perinatal-production.up.railway.app',
-}));
+app.use(cors());
 
 const PORT = 5001;
 
