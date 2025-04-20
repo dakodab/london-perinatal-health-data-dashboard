@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3';
 
-const LondonMap = ({ indicatorData, unit }) => {
+const LondonMap = ({ indicatorData }) => {
   const londonMapRef = useRef(); // svgref - London map
 
   useEffect(() => {
@@ -47,8 +47,7 @@ const LondonMap = ({ indicatorData, unit }) => {
       console.log('Color domain:', d3.extent(indicatorData, d => d.value));
 
       const colorScale = d3.scaleSequential()
-        // .domain(d3.extent(indicatorData, d => d.value)) // [min, max]
-        .domain([0, d3.max(indicatorData, d => d.value)]) // [zero, max]
+        .domain(d3.extent(indicatorData, d => d.value))// [min, max]
         .interpolator(d3.interpolateBlues); // or interpolateYlGnBu, etc.
 
       // Filter features to include only London boroughs (LAD24CD starts with 'E09') //
@@ -91,7 +90,7 @@ const LondonMap = ({ indicatorData, unit }) => {
           const isCity = name === 'City of London';
           const displayName = (isHackney) ? 'Hackney (combined with City of London)' : (isCity) ? 'City of London (combined with Hackney)' : name;
           const value = valueMap.get(displayName);
-          const formattedValue = typeof value === 'number' ? `${value.toFixed(1)}${unit}` : 'No data';
+          const formattedValue = typeof value === 'number' ? `${value.toFixed(1)}` : 'No data';
 
           tooltip
             .style('visibility', 'visible')
@@ -108,7 +107,7 @@ const LondonMap = ({ indicatorData, unit }) => {
 
     }); // end of d3.json block (draws maps) //
 
-  }, [indicatorData, unit]); // end of if data then use effect //
+  }, [indicatorData]); // end of if data then use effect //
 
   return (
     <div>

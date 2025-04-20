@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 // import axios from 'axios'; // not currently being used? //
 import LondonMap from './components/london.map.experimental';
-import IndicatorTable from './components/IndicatorTable';
 
 
 const indicatorList = [
@@ -39,20 +38,20 @@ function App() {
   // js function to sort data //
   const sortByValue = () => {
     if (!indicatorData || !indicatorData.rows) return;
-
+  
     const sortedRows = [...indicatorData.rows].sort((a, b) =>
       sortAsc ? a.value - b.value : b.value - a.value
     );
-
+  
     setSortedIndicatorData({
       title: indicatorData.title,
       rows: sortedRows
     });
-
+  
     setSortAsc(!sortAsc); // ascending --> flip order = descending //
   };
 
-  // useEffect - Fetch data for the selected indicator //
+ // useEffect - Fetch data for the selected indicator //
   useEffect(() => {
     // fetch filtered rows for the selected indicator from Express API
     fetch(`https://fingertips-production-ca6d.up.railway.app/api/railway/indicator/${selectedIndicatorId}`)
@@ -75,99 +74,84 @@ function App() {
       </div>
     );
   }
-
+  
   // content //
   return (
-    <div className="container-scroller">
-      <div className="container-fluid page-body-wrapper">
-        <div className="main-panel">
-          <div className="content-wrapper">
+    <div style={{ padding: '50px' }}>  
 
-            {/* Row 1: Title */}
-            <div className="row mb-4">
-              <div className="col">
-                <h1 className="fw-bold">London Perinatal Health Data</h1>
-              </div>
-            </div>
+      <h1>London Perinatal Health Data</h1>
 
-            {/* Row 2: Indicator selector */}
-            <div className="row mb-4">
-              <div className="col-md-6">
-                <label htmlFor="indicator-select" className="form-label">Select an indicator:</label>
-                <select
-                  id="indicator-select"
-                  className="form-select"
-                  value={selectedIndicatorId}
-                  onChange={(e) => setSelectedIndicatorId(e.target.value)}
-                >
-                  {indicatorList.map((indicator) => (
-                    <option key={indicator.id} value={indicator.id}>
-                      {indicator.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
+      <div>  {/* Indicator Selector */} 
+        <label htmlFor="indicator-select">Select an indicator: </label>
+        <select
+          id="indicator-select"
+          value={selectedIndicatorId}
+          onChange={(e) => setSelectedIndicatorId(e.target.value)}
+        >
+          {indicatorList.map((indicator) => (
+            <option key={indicator.id} value={indicator.id}>
+              {indicator.name}
+            </option>
+          ))}
+        </select>
+      </div>  {/* End of Indicator Selector */} 
+    
+      
+      <div uk-grid >
+      
+        <div class="uk-width-1-1@s uk-width-1-2@m">
 
-            {/* Row 3: Table + Map side by side */}
-            <div className="row">
+          {/* Table Title*/} 
+          <h2> 
+            {
+              `${indicatorList.find((item) => item.id === selectedIndicatorId)?.name || 'Selected Indicator'}, ${indicatorData.title.split(', ')[1]}`
+            }
+          </h2>
+          {/* Table */} 
+          <table border="1" cellPadding="8" style={{ borderCollapse: 'collapse', marginBottom: '30px' }}>
+            <thead>
+              <tr>
+                <th>Borough</th>
+                <th style={{ cursor: 'pointer' }} onClick={sortByValue}>
+                  Value {sortAsc ? '↑' : '↓'}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {(sortedIndicatorData ? sortedIndicatorData.rows : indicatorData.rows).map((row) => (
+                <tr key={row.area_name}>
+                  <td>
+                    {row.area_name === 'Hackney'
+                      ? 'Hackney (including City of London)'
+                      : row.area_name}
+                  </td>
+                  <td>
+                    {typeof row.value === 'number'
+                      ? `${row.value.toFixed(1)}${indicatorList.find(i => i.id === selectedIndicatorId)?.unit || ''}`
+                      : 'no data'}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>  {/* End of Table */} 
+        </div>  {/* End of div class */} 
+      
+        <div class="uk-width-1-1@s uk-width-1-2@m">
+            <h2>
+              {
+                `${indicatorList.find((item) => item.id === selectedIndicatorId)?.name || 'Selected Indicator'}, ${indicatorData.title.split(', ')[1]} – Map`
+              }
+            </h2>
+            
+            <LondonMap indicatorData={indicatorData.rows} />
+        </div>
+      </div> 
 
-              {/* TABLE - Column 1 */}
-              <div className="col-md-6">
+            <p> 
+              Source: <a href="https://www.gov.uk/government/organisations/office-for-health-improvement-and-disparities">Office for Health Improvement and Disparities</a> -  <a href="https://fingertips.phe.org.uk/">Public Health Profiles</a>, via <a href="https://fingertips.phe.org.uk/api">Fingertips API</a>
+            </p>
 
-                {/* Table Title*/}
-                <h2>
-                  {
-                    `${indicatorList.find((item) => item.id === selectedIndicatorId)?.name || 'Selected Indicator'}, ${indicatorData.title.split(', ')[1]}`
-                  }
-                </h2>
-
-                {/* Table Content */}
-                <IndicatorTable
-                  data={indicatorData}
-                  sortedData={sortedIndicatorData}
-                  sortAsc={sortAsc}
-                  sortByValue={sortByValue}
-                  selectedIndicatorId={selectedIndicatorId}
-                  indicatorList={indicatorList}
-                />
-              </div> {/* End of TABLE - Column 1 */}
-
-
-              {/* MAP LondonMap - Column 2*/}
-              <div className="col-md-6">
-
-                {/* LondonMap Title */}
-                <h2>
-                  {
-                    `${indicatorList.find((item) => item.id === selectedIndicatorId)?.name || 'Selected Indicator'}, ${indicatorData.title.split(', ')[1]} – Map`
-                  }
-                </h2>
-
-                {/* LondonMap Content */}
-                <LondonMap
-                  indicatorData={indicatorData.rows}
-                  unit={
-                    indicatorList.find(i => i.id === selectedIndicatorId)?.unit || ''
-                  }
-                />
-              </div> {/* End of MAP Column 2 */}
-
-            </div> {/* End of Row 3: Table + Map side by side */}
-
-
-
-            {/* Row 4: Footer */}
-            <div className="row mb-4">
-              <div className="col">
-                <p> Source: <a href="https://www.gov.uk/government/organisations/office-for-health-improvement-and-disparities">Office for Health Improvement and Disparities</a> -  <a href="https://fingertips.phe.org.uk/">Public Health Profiles</a>, via <a href="https://fingertips.phe.org.uk/api">Fingertips API</a></p>
-              </div>
-            </div> {/* end of Row 4: Footer */}
-          </div> {/* end content-wrapper */}
-        </div> {/* end main-panel */}
-      </div> {/* end page-body-wrapper */}
-    </div> {/* end container-scroller */ }
-
+    </div>
   );
 }
 
