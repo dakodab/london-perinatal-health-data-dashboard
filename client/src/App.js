@@ -99,7 +99,7 @@ function App() {
           <div className="card-body">
             <div>
               <h5 className="mb-3">
-                {`${indicatorList.find((item) => item.id === selectedIndicatorId)?.name || 'Selected Indicator'}, ${indicatorData.title.split(', ')[1]} – Table`}
+                {`${indicatorList.find((item) => item.id === selectedIndicatorId)?.name || 'Selected Indicator'}, ${indicatorData.title.split(', ')[1]} `}
               </h5>
               <label htmlFor="indicator-select">Select an indicator: </label>
               <select
@@ -118,10 +118,10 @@ function App() {
         </div>
 
         <div className="row">
-          <div className="col-12 col-md-6">
+          <div className="col-12 col-md-4">
             <div className="card mb-4">
-              <div className="card-body">
-                <table className="table table-bordered">
+              <div className="card-body style={{ fontSize: '0.85rem' }">
+                <table className="table table-bordered table-sm align-middle">
                   <thead>
                     <tr>
                       <th>Borough</th>
@@ -151,7 +151,7 @@ function App() {
             </div>
           </div>
 
-          <div className="col-12 col-md-6">
+          <div className="col-12 col-md-8">
             <div className="card mb-4">
               <div className="card-body">
                 <LondonMap
