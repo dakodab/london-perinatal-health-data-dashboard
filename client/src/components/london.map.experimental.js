@@ -107,7 +107,7 @@ const LondonMap = ({ indicatorData, unit }) => {
 
     }); // end of d3.json block (draws maps) //
 
-  }, [indicatorData]); // end of if data then use effect //
+  }, [indicatorData, unit]); // end of if data then use effect //
 
   return (
     <div>
