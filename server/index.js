@@ -165,6 +165,8 @@ app.get('/api/railway/indicator/:id', (req, res) => {
   });
 });
 
+const path = require('path');
+
 // Serve your static data (like the GeoJSON)
 app.use('/data', express.static(path.join(__dirname, '../client/public/data')));
 
