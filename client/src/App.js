@@ -38,6 +38,9 @@ function App() {
   // use state track which part of the dashboard should be shown //
   const [activeSection, setActiveSection] = useState('recent-borough');
 
+  // for test //
+  console.log("Currently active section:", activeSection);
+
   // js function to sort data //
   const sortByValue = () => {
     if (!indicatorData || !indicatorData.rows) return;
