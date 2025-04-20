@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 // import axios from 'axios'; // not currently being used? //
 import LondonMap from './components/london.map.experimental';
 import Layout from './components/Layout';
-// import MostRecentCitywide from './views/MostRecentCitywide';
+import MostRecentCitywide from './views/MostRecentCitywide';
+import TrendsCitywide from './views/TrendsCitywide';
+import TrendsByBorough from './views/TrendsByBorough.js';
 
 const indicatorList = [
   { id: '90731', name: 'Low Birth Weight (alt method)', unit: ' per 1,000', rows: 768 },
@@ -85,6 +87,10 @@ function App() {
   // content //
   return (
   <Layout setActiveSection={setActiveSection}>
+    {activeSection === 'recent-city' && (
+      <MostRecentCitywide />
+    )}
+
     {activeSection === 'recent-borough' && (
       <div className="container mt-4">
         <div className="card mb-4">
@@ -162,6 +168,14 @@ function App() {
           <a href="https://fingertips.phe.org.uk/api">Fingertips API</a>
         </p>
       </div>
+    )}
+
+    {activeSection === 'trend-city' && (
+    <TrendsCitywide />
+    )}
+
+    {activeSection === 'trend-borough' && (
+    <TrendsByBorough />
     )}
   </Layout>
   );
