@@ -101,8 +101,8 @@ function App() {
               <h5 className="mb-3">
                 {`${indicatorList.find((item) => item.id === selectedIndicatorId)?.name || 'Selected Indicator'}, ${indicatorData.title.split(', ')[1]} `}
               </h5>
-              <label htmlFor="indicator-select">Select an indicator: </label>
-              <select
+              <label htmlFor="indicator-select"className="me-2">Select an indicator: </label>
+              <select className="form-select d-inline-block w-auto"
                 id="indicator-select"
                 value={selectedIndicatorId}
                 onChange={(e) => setSelectedIndicatorId(e.target.value)}
@@ -120,33 +120,35 @@ function App() {
         <div className="row">
           <div className="col-12 col-md-4">
             <div className="card mb-4">
-              <div className="card-body style={{ fontSize: '0.85rem' }">
-                <table className="table table-bordered table-sm align-middle">
-                  <thead>
-                    <tr>
-                      <th>Borough</th>
-                      <th style={{ cursor: 'pointer' }} onClick={sortByValue}>
-                        Value {sortAsc ? '↑' : '↓'}
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {(sortedIndicatorData ? sortedIndicatorData.rows : indicatorData.rows).map((row) => (
-                      <tr key={row.area_name}>
-                        <td>
-                          {row.area_name === 'Hackney'
-                            ? 'Hackney (including City of London)'
-                            : row.area_name}
-                        </td>
-                        <td>
-                          {typeof row.value === 'number'
-                            ? `${row.value.toFixed(1)}${indicatorList.find(i => i.id === selectedIndicatorId)?.unit || ''}`
-                            : 'no data'}
-                        </td>
+              <div className="card-body" style={{ fontSize: '0.85rem', overflowX: 'auto' }}>
+                <div className="table-responsive">
+                  <table className="table table-bordered table-sm align-middle">
+                    <thead>
+                      <tr>
+                        <th>Borough</th>
+                        <th style={{ cursor: 'pointer', whiteSpace: 'nowrap' }} onClick={sortByValue}>
+                          Value &nbsp;{sortAsc ? '↑' : '↓'}
+                        </th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {(sortedIndicatorData ? sortedIndicatorData.rows : indicatorData.rows).map((row) => (
+                        <tr key={row.area_name}>
+                          <td>
+                            {row.area_name === 'Hackney'
+                              ? 'Hackney (including City of London)'
+                              : row.area_name}
+                          </td>
+                          <td>
+                            {typeof row.value === 'number'
+                              ? `${row.value.toFixed(1)}${indicatorList.find(i => i.id === selectedIndicatorId)?.unit || ''}`
+                              : 'no data'}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
