@@ -96,7 +96,7 @@ function App() {
     {activeSection === 'recent-borough' && (
       <div className="container mt-4">
         <div className="card mb-4">
-          <div className="card-body">
+          <div className="card-body p-2" style={{ fontSize: '0.85rem', overflowX: 'auto' }}>
             <div>
               <h5 className="mb-3">
                 {`${indicatorList.find((item) => item.id === selectedIndicatorId)?.name || 'Selected Indicator'}, ${indicatorData.title.split(', ')[1]} `}
@@ -120,7 +120,7 @@ function App() {
         <div className="row">
           <div className="col-12 col-md-4">
             <div className="card mb-4">
-              <div className="card-body" style={{ fontSize: '0.85rem', overflowX: 'auto' }}>
+              <div className="card-body p-2" style={{ fontSize: '0.85rem', overflowX: 'auto' }}>
                 <div className="table-responsive">
                   <table className="table table-bordered table-sm align-middle">
                     <thead>
@@ -155,7 +155,7 @@ function App() {
 
           <div className="col-12 col-md-8">
             <div className="card mb-4">
-              <div className="card-body">
+              <div className="card-body p-2" style={{ fontSize: '0.85rem', overflowX: 'auto' }}>
                 <LondonMap
                   indicatorData={indicatorData.rows}
                   unit={indicatorList.find(i => i.id === selectedIndicatorId)?.unit || ''}
