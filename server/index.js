@@ -156,6 +156,12 @@ app.get('/api/railway/indicator/:id', (req, res) => {
 
       console.log('📊 Rows returned:', results.length);
 
+
+      console.log("Sending this data to the frontend:");
+      console.log(JSON.stringify({
+        title: `Indicator ${indicatorId}, ${latestTimePeriod}`,
+        rows: results
+      }, null, 2));
       res.json({
         title: `Indicator ${indicatorId}, ${latestTimePeriod}`,
         rows: results
