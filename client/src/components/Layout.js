@@ -57,7 +57,7 @@ function Layout({ children, setActiveSection }) {
                 </a>
                 </li>
               </ul>
-            </li>git push
+            </li>
         </ul>
       </div>
 
