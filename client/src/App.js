@@ -89,7 +89,7 @@ function App() {
     <Layout
       setActiveSection={setActiveSection}
       activeSection={activeSection}>
-    {activeSection === 'recent-city' && (
+    {activeSection === 'recent-citywide' && (
       <MostRecentCitywide />
     )}
 
@@ -118,7 +118,7 @@ function App() {
         </div>
 
         <div className="row">
-          <div className="col-12 col-md-4">
+          <div className="col-12 col-md-5">
             <div className="card mb-4">
               <div className="card-body p-2" style={{ fontSize: '0.85rem', overflowX: 'auto' }}>
                 <div className="table-responsive">
@@ -153,7 +153,7 @@ function App() {
             </div>
           </div>
 
-          <div className="col-12 col-md-8">
+          <div className="col-12 col-md-7">
             <div className="card mb-4">
               <div className="card-body p-2" style={{ fontSize: '0.85rem', overflowX: 'auto' }}>
                 <LondonMap
@@ -177,11 +177,11 @@ function App() {
       </div>
     )}
 
-    {activeSection === 'trend-city' && (
+    {activeSection === 'trends-city' && (
     <TrendsCitywide />
     )}
 
-    {activeSection === 'trend-borough' && (
+    {activeSection === 'trends-borough' && (
     <TrendsByBorough />
     )}
   </Layout>
