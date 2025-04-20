@@ -11,15 +11,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-.footer-sticky {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: #f8f9fa;
-  padding: 16px 0;
-  box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
-  border-top: 1px solid #dee2e6;
-  text-align: center;
-  z-index: 1030;
-}

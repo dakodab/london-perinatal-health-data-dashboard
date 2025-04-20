@@ -78,7 +78,7 @@ function App() {
 
   // content //
   return (
-    <div className="container-scroller" style={{ paddingBottom: '100px' }}>
+    <div className="container-scroller">
       <div className="container-fluid page-body-wrapper">
         <div className="main-panel">
           <div className="content-wrapper">
@@ -96,7 +96,7 @@ function App() {
                 <label htmlFor="indicator-select" className="form-label">Select an indicator:</label>
                 <select
                   id="indicator-select"
-                  className="form-select text-dark"
+                  className="form-select"
                   value={selectedIndicatorId}
                   onChange={(e) => setSelectedIndicatorId(e.target.value)}
                 >
@@ -115,51 +115,42 @@ function App() {
               {/* TABLE - Column 1 */}
               <div className="col-md-6">
 
-                 {/* Outer white card container for map panel */}
-                 <div className="w-100 p-3 bg-white rounded shadow-sm">               
+                {/* Table Title*/}
+                <h2>
+                  {
+                    `${indicatorList.find((item) => item.id === selectedIndicatorId)?.name || 'Selected Indicator'}, ${indicatorData.title.split(', ')[1]}`
+                  }
+                </h2>
 
-                  {/* Table Title*/}
-                  <h2>
-                    {
-                      `${indicatorList.find((item) => item.id === selectedIndicatorId)?.name || 'Selected Indicator'} by Borough, ${indicatorData.title.split(', ')[1]} - Table`
-                    }
-                  </h2>
-
-                  {/* Table Content */}
-                  <IndicatorTable
-                    data={indicatorData}
-                    sortedData={sortedIndicatorData}
-                    sortAsc={sortAsc}
-                    sortByValue={sortByValue}
-                    selectedIndicatorId={selectedIndicatorId}
-                    indicatorList={indicatorList}
-                  />
-                </div>
+                {/* Table Content */}
+                <IndicatorTable
+                  data={indicatorData}
+                  sortedData={sortedIndicatorData}
+                  sortAsc={sortAsc}
+                  sortByValue={sortByValue}
+                  selectedIndicatorId={selectedIndicatorId}
+                  indicatorList={indicatorList}
+                />
               </div> {/* End of TABLE - Column 1 */}
 
 
               {/* MAP LondonMap - Column 2*/}
-              <div className="col-md-6 d-flex justify-content-center">
-                {/* Outer white card container for map panel */}
-                <div className="w-100 p-3 bg-white rounded shadow-sm">
-                  {/* LondonMap Title */}
-                  <h2 className="mb-3">
-                    {
-                      `${indicatorList.find((item) => item.id === selectedIndicatorId)?.name || 'Selected Indicator'} by Borough, ${indicatorData.title.split(',')[1]} – Map`
-                    }
-                  </h2>
+              <div className="col-md-6">
 
-                  {/* LondonMap Content */}
-                  {/* fix off centerness */}
-                  <div style={{ maxWidth: '100%', width: '100%', display: 'flex', justifyContent: 'center' }}>
-                    <LondonMap
-                      indicatorData={indicatorData.rows}
-                      unit={
-                        indicatorList.find(i => i.id === selectedIndicatorId)?.unit || ''
-                      }
-                    />
-                  </div> {/* End of fix off centerness */}
-                </div> {/* Outer white card container for map panel */}
+                {/* LondonMap Title */}
+                <h2>
+                  {
+                    `${indicatorList.find((item) => item.id === selectedIndicatorId)?.name || 'Selected Indicator'}, ${indicatorData.title.split(', ')[1]} – Map`
+                  }
+                </h2>
+
+                {/* LondonMap Content */}
+                <LondonMap
+                  indicatorData={indicatorData.rows}
+                  unit={
+                    indicatorList.find(i => i.id === selectedIndicatorId)?.unit || ''
+                  }
+                />
               </div> {/* End of MAP Column 2 */}
 
             </div> {/* End of Row 3: Table + Map side by side */}
@@ -167,25 +158,16 @@ function App() {
 
 
             {/* Row 4: Footer */}
-            <footer className="footer-sticky">
-              <p className="mb-0 text-muted small">
-                <b>Source: </b>
-                <a href="https://www.gov.uk/government/organisations/office-for-health-improvement-and-disparities" target="_blank" rel="noopener noreferrer" className="ms-1">
-                  Office for Health Improvement and Disparities
-                </a> – 
-                <a href="https://fingertips.phe.org.uk/" target="_blank" rel="noopener noreferrer" className="ms-1">
-                  Public Health Profiles
-                </a>, via 
-                <a href="https://fingertips.phe.org.uk/api" target="_blank" rel="noopener noreferrer" className="ms-1">
-                  Fingertips API
-                </a>
-              </p>
-            </footer>
-
+            <div className="row mb-4">
+              <div className="col">
+                <p> Source: <a href="https://www.gov.uk/government/organisations/office-for-health-improvement-and-disparities">Office for Health Improvement and Disparities</a> -  <a href="https://fingertips.phe.org.uk/">Public Health Profiles</a>, via <a href="https://fingertips.phe.org.uk/api">Fingertips API</a></p>
+              </div>
+            </div> {/* end of Row 4: Footer */}
           </div> {/* end content-wrapper */}
         </div> {/* end main-panel */}
       </div> {/* end page-body-wrapper */}
-    </div>
+    </div> {/* end container-scroller */ }
+
   );
 }
 
