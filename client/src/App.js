@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 // import axios from 'axios'; // not currently being used? //
 import LondonMap from './components/london.map.experimental';
+import Layout from './components/Layout';
 
 
 const indicatorList = [
@@ -77,6 +78,7 @@ function App() {
   
   // content //
   return (
+    <Layout>
     <div style={{ padding: '50px' }}>  
 
       <h1>London Perinatal Health Data</h1>
@@ -155,6 +157,7 @@ function App() {
             </p>
 
     </div>
+    </Layout>
   );
 }
 

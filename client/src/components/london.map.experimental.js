@@ -47,7 +47,7 @@ const LondonMap = ({ indicatorData, unit }) => {
       console.log('Color domain:', d3.extent(indicatorData, d => d.value));
 
       const colorScale = d3.scaleSequential()
-        .domain(d3.extent(indicatorData, d => d.value))// [min, max]
+        .domain([0, d3.max(indicatorData, d => d.value)]) // from 0 to max
         .interpolator(d3.interpolateBlues); // or interpolateYlGnBu, etc.
 
       // Filter features to include only London boroughs (LAD24CD starts with 'E09') //
