@@ -63,7 +63,7 @@ function App() {
     fetch(`https://fingertips-production-ca6d.up.railway.app/api/railway/indicator/${selectedIndicatorId}`)
       .then(res => res.json())
       .then(json => {
-        console.log(`Fetched data for indicator ${selectedIndicatorId}:`, json);
+        // console.log(`Fetched data for indicator ${selectedIndicatorId}:`, json);
         setIndicatorData(json);
         setSortedIndicatorData(null); // reset sorting
       })
