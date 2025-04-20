@@ -12,7 +12,7 @@ function Layout({ children, setActiveSection }) {
         style={{ width: '250px' }}
       >
         {/* Sidebar Title */}
-        <h4 className="mb-4">London Perinatal Health Data Dashboard</h4>
+        <h4 className="mb-4">London Perinatal Health</h4>
 
         {/* Sidebar Navigation List */}
         <ul className="nav flex-column">
@@ -26,12 +26,20 @@ function Layout({ children, setActiveSection }) {
               {/* Sub-links indented using Bootstrap margin start (ms-3) */}
               <ul className="nav flex-column ms-3">
                 <li className="nav-item">
-                <a className="nav-link" href="#city" onClick={() => setActiveSection('recent-city')}>
+                <a
+                  className={`nav-link ${activeSection === 'recent-citywide' ? 'text-primary fw-bold' : 'text-dark'}`}
+                  href="#city"
+                  onClick={() => setActiveSection('recent-citywide')}
+                >
                     Citywide
                 </a>
                 </li>
                 <li className="nav-item">
-                <a className="nav-link" href="#borough" onClick={() => setActiveSection('recent-borough')}>
+                <a
+                  className={`nav-link ${activeSection === 'recent-borough' ? 'text-primary fw-bold' : 'text-dark'}`}
+                  href="#borough"
+                  onClick={() => setActiveSection('recent-borough')}
+                >
                     By Borough
                 </a>
                 </li>
@@ -47,12 +55,20 @@ function Layout({ children, setActiveSection }) {
               {/* Sub-links for Citywide vs. Borough */}
               <ul className="nav flex-column ms-3">
                 <li className="nav-item">
-                <a className="nav-link" href="#city-trends" onClick={() => setActiveSection('trend-city')}>
+                <a
+                  className={`nav-link ${activeSection === 'trends-city' ? 'text-primary fw-bold' : 'text-dark'}`}
+                  href="#city-trends"
+                  onClick={() => setActiveSection('trends-city')}
+                >
                     Citywide
                 </a>
                 </li>
                 <li className="nav-item">
-                <a className="nav-link" href="#borough-trends" onClick={() => setActiveSection('trend-borough')}>
+                <a
+                  className={`nav-link ${activeSection === 'trends-borough' ? 'text-primary fw-bold' : 'text-dark'}`}
+                  href="#borough-trends"
+                  onClick={() => setActiveSection('trends-borough')}
+                >
                     By Borough
                 </a>
                 </li>
