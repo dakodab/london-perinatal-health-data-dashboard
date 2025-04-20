@@ -126,7 +126,6 @@ const LondonMap = ({ indicatorData, unit }) => {
 
       {/* London map legend */}
       <div style={{ marginTop: '20px' }}>
-        <h3>Legend: Indicator Value</h3>
         <svg width="300" height="60">
           <defs>
             <linearGradient id="legendGradient">
