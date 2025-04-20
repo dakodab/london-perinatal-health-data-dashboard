@@ -3,7 +3,7 @@ import React from 'react'; // Import React to write a React component
 
 // Layout ("functional component")
 // "children" = react "prop"
-function Layout({ children }) {
+function Layout({ children, setActiveSection }) {
   return (
     <div className="d-flex">
       {/* Sidebar section - sticks to the left side */}
@@ -26,10 +26,14 @@ function Layout({ children }) {
               {/* Sub-links indented using Bootstrap margin start (ms-3) */}
               <ul className="nav flex-column ms-3">
                 <li className="nav-item">
-                  <a className="nav-link" href="#city">Citywide</a>
+                <a className="nav-link" href="#city" onClick={() => setActiveSection('recent-city')}>
+                    Citywide
+                </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#borough">By Borough</a>
+                <a className="nav-link" href="#borough" onClick={() => setActiveSection('recent-borough')}>
+                    By Borough
+                </a>
                 </li>
               </ul>
             </li>
@@ -43,10 +47,14 @@ function Layout({ children }) {
               {/* Sub-links for Citywide vs. Borough */}
               <ul className="nav flex-column ms-3">
                 <li className="nav-item">
-                  <a className="nav-link" href="#city-trends">Citywide</a>
+                <a className="nav-link" href="#city-trends" onClick={() => setActiveSection('trend-city')}>
+                    Citywide
+                </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#borough-trends">By Borough</a>
+                <a className="nav-link" href="#borough-trends" onClick={() => setActiveSection('trend-borough')}>
+                    By Borough
+                </a>
                 </li>
               </ul>
             </li>

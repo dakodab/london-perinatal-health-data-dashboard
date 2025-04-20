@@ -35,6 +35,9 @@ function App() {
   // use state - tracks current indicator //
   const [selectedIndicatorId, setSelectedIndicatorId] = useState('94121');
 
+  // use state track which part of the dashboard should be shown //
+  const [activeSection, setActiveSection] = useState('recent-borough');
+
   // js function to sort data //
   const sortByValue = () => {
     if (!indicatorData || !indicatorData.rows) return;
@@ -77,11 +80,10 @@ function App() {
   
   // content //
   return (
-    <Layout>
+    <Layout setActiveSection={setActiveSection}>
       <div className="container mt-4">
         <div className="card mb-4">
           <div className="card-body">
-            <h1 className="card-title">London Perinatal Health Data</h1>
             <div>
               <label htmlFor="indicator-select">Select an indicator: </label>
               <select
