@@ -9,7 +9,7 @@ function TrendsByBorough({
   selectedBoroughCode,
   setSelectedBoroughCode
 }) {
-  
+
   const chartRef = useRef();
   const [trendData, setTrendData] = useState([]);
   
@@ -88,8 +88,7 @@ function TrendsByBorough({
 
       {/* Selectors */}
       <div className="card mb-4">
-        <div className="card-body">
-
+        <div className="card-body p-2" style={{ fontSize: '0.85rem', overflowX: 'auto' }}>
           {/* Select Indicator */}
           <label htmlFor="indicator-select" className="me-2">Select an indicator:</label>
             <select className="form-select d-inline-block w-auto"
