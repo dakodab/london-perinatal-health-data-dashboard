@@ -28,14 +28,19 @@ fs.createReadStream(path.join(__dirname, 'indicator-data.csv'))
 
     // Skip rows with empty or non-numeric value
     if (value === '' || isNaN(parseFloat(value))) {
+      console.warn(`⏩ Skipping row: ${row['Indicator ID']} / ${row['Area Code']} / ${row['Time period']} — invalid value: "${value}"`);
       return;
     }
 
+    if (row['Area Code'].trim() === 'E12000007') {
+      console.log('✅ Found citywide row for', row['Indicator ID'], row['Time period']);
+    }
+
     results.push([
-      row['Indicator ID'],
-      row['Area Code'],
-      row['Area Name'],
-      row['Time period'],
+      row['Indicator ID'].trim(), // trim removes white space 
+      row['Area Code'].trim(),
+      row['Area Name'].trim(),
+      row['Time period'].trim(),
       parseFloat(value)
     ]);
   })

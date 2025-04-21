@@ -10,7 +10,6 @@ function TrendsCitywide({
   const [trendData, setTrendData] = useState([]);
   const chartRef = useRef();
 
-  
   useEffect(() => {
     const svg = d3.select(chartRef.current);
     svg.selectAll('*').remove(); // Clear previous renders

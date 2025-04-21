@@ -9,6 +9,7 @@ function TrendsByBorough({
   selectedBoroughCode,
   setSelectedBoroughCode
 }) {
+  
   const chartRef = useRef();
   const [trendData, setTrendData] = useState([]);
   
