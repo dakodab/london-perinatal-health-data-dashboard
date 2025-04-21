@@ -140,6 +140,28 @@ app.get('/api/railway/latest-indicators/citywide', (req, res) => {
   });
 });
 
+// Gets all values over time for one indicator (London-wide only)
+app.get('/api/railway/history/citywide/:indicatorId', (req, res) => {
+  const { indicatorId } = req.params;
+
+  const sql = `
+    SELECT time_period, value
+    FROM indicators
+    WHERE indicator_id = ?
+      AND area_code = 'E12000007'
+    ORDER BY time_period;
+  `;
+
+  connection.query(sql, [indicatorId], (err, results) => {
+    if (err) {
+      console.error('❌ Error fetching citywide indicator history:', err);
+      return res.status(500).json({ error: 'Database error' });
+    }
+
+    res.json(results);
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
