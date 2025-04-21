@@ -5,11 +5,11 @@ import React from 'react'; // Import React to write a React component
 // "children" = react "prop"
 function Layout({ children, setActiveSection, activeSection }) {
   return (
-    <div className="d-flex">
+    <div className="d-flex" style={{ height: '100vh', overflow: 'hidden' }}>
       {/* Sidebar section - sticks to the left side */}
       <div
-        className="bg-light border-end vh-100 p-3"
-        style={{ width: '250px' }}
+        className="bg-light border-end p-3"
+        style={{ width: '250px', position: 'sticky', top: 0, height: '100vh', overflowY: 'auto' }}
       >
         {/* Sidebar Title */}
         <h4 className="mb-4">London Perinatal Health</h4>
@@ -78,8 +78,8 @@ function Layout({ children, setActiveSection, activeSection }) {
       </div>
 
       {/* Main content area where all the dashboard content appears */}
-      {/* "flex-grow-1" makes this take up the rest of the space beside the sidebar */}
-      <div className="flex-grow-1 p-4 bg-light">
+      {/* "flex-grow-1" makes this take up the rest of the space beside the sidebar - overflow allows main content to scroll*/}
+      <div className="flex-grow-1 p-4 bg-light" style={{ overflowY: 'auto' }}>
         {children} {/* This will render whatever content is passed into <Layout> from App.js */}
       </div>
     </div>
