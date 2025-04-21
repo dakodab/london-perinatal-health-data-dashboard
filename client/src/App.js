@@ -90,6 +90,7 @@ function App() {
     <Layout
       setActiveSection={setActiveSection}
       activeSection={activeSection}>
+        
     {activeSection === 'recent-citywide' && (
       <MostRecentCitywide />
     )}
@@ -107,11 +108,15 @@ function App() {
     )}
 
     {activeSection === 'trends-city' && (
-    <TrendsCitywide />
+      <TrendsCitywide />
     )}
 
     {activeSection === 'trends-borough' && (
-    <TrendsByBorough />
+      <TrendsByBorough
+        indicatorList={indicatorList}
+        selectedIndicatorId={selectedIndicatorId}
+        setSelectedIndicatorId={setSelectedIndicatorId}
+      />
     )}
   </Layout>
   );

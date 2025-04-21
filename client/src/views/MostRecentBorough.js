@@ -12,9 +12,9 @@ const MostRecentBorough = ({
 }) => {
   return (
     <div className="container mt-4">
-      <h4 className="mb-3">
+      <h2 className="mb-3">
         {`${indicatorList.find((item) => item.id === selectedIndicatorId)?.name || 'Selected Indicator'}, ${indicatorData.title.split(', ')[1]} `}
-      </h4>
+      </h2>
       <div className="card mb-4">
         <div className="card-body p-2" style={{ fontSize: '0.85rem', overflowX: 'auto' }}>
           <div>
