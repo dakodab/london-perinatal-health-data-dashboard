@@ -67,7 +67,7 @@ const boroughList = [
 ];
 
 function App() {
-  // useState - holds the Early Access to Maternity Care rows //
+  // useState - holds the Early Access to Maternity Care rows // is this still needed? //
   const [indicatorData, setIndicatorData] = useState(null);
 
   // useState - tracks sort direction // 
@@ -80,7 +80,7 @@ function App() {
   // use state track which part of the dashboard should be shown //
   const [activeSection, setActiveSection] = useState('recent-borough');
 
-  // use state track current borough //
+  // use state track current borough (for data over time by borough) //
   const [selectedBoroughCode, setSelectedBoroughCode] = useState(boroughList[0].code);
 
   // for test //
