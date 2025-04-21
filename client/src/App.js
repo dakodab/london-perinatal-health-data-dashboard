@@ -150,9 +150,6 @@ function App() {
 
     {activeSection === 'trends-city' && (
       <TrendsCitywide
-        indicatorList={indicatorList}
-        selectedIndicatorId={selectedIndicatorId}
-        setSelectedIndicatorId={setSelectedIndicatorId}
       />
     )}
 
