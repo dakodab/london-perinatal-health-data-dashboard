@@ -98,6 +98,7 @@ app.get('/api/railway/trends/:indicatorId/:boroughCode', (req, res) => {
 // gets time series data for a citywide indicator (area code: E12000007)
 app.get('/api/railway/trends/city/:indicatorId', (req, res) => {
   const { indicatorId } = req.params;
+  console.log('Citywide API hit with indicatorId:', indicatorId);
 
   const sql = `
     SELECT time_period, value
