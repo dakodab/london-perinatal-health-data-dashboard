@@ -11,8 +11,8 @@ function MostRecentCitywide() {
           <div className="col-md-4 mb-4">
             <div className="card h-100">
               <div className="card-body">
-                <h5 className="card-title">Card 1</h5>
-                <p className="card-text">Custom content for card 1.</p>
+                <h5 className="card-title">Early Access to Maternity Care</h5>
+                <p className="card-text">Early Access to Maternity Care: </p>
               </div>
             </div>
           </div>
@@ -20,8 +20,8 @@ function MostRecentCitywide() {
           <div className="col-md-4 mb-4">
             <div className="card h-100">
               <div className="card-body">
-                <h5 className="card-title">Card 2</h5>
-                <p className="card-text">Custom content for card 2.</p>
+                <h5 className="card-title">General fertility rate</h5>
+                <p className="card-text">General fertility rate:</p>
               </div>
             </div>
           </div>
@@ -29,8 +29,8 @@ function MostRecentCitywide() {
           <div className="col-md-4 mb-4">
             <div className="card h-100">
               <div className="card-body">
-                <h5 className="card-title">Card 3</h5>
-                <p className="card-text">Custom content for card 3.</p>
+                <h5 className="card-title">Percentage of deliveries to women from ethnic minority groups</h5>
+                <p className="card-text">Percentage of deliveries to women from ethnic minority groups:</p>
               </div>
             </div>
           </div>
@@ -38,8 +38,16 @@ function MostRecentCitywide() {
           <div className="col-md-4 mb-4">
             <div className="card h-100">
               <div className="card-body">
-                <h5 className="card-title">Card 4</h5>
-                <p className="card-text">Custom content for card 4.</p>
+                <h5 className="card-title">Birth Weight</h5>
+                <p className="card-text">
+                  Low Birth Weight (alt method):
+                  <br/>
+                  Low birth weight of term babies:
+                  <br/>
+                  Low birth weight of all babies:
+                  <br/>
+                  Very low birth weight of all babies:
+                </p>
               </div>
             </div>
           </div>
@@ -47,8 +55,14 @@ function MostRecentCitywide() {
           <div className="col-md-4 mb-4">
             <div className="card h-100">
               <div className="card-body">
-                <h5 className="card-title">Card 5</h5>
-                <p className="card-text">Custom content for card 5.</p>
+                <h5 className="card-title">Teenage Pregnancy and Birth</h5>
+                <p className="card-text">
+                Under 18s conception rate:
+                <br/>
+                Under 18s births rate:
+                <br/>
+                Teenage mothers:
+                </p>
               </div>
             </div>
           </div>
@@ -56,8 +70,18 @@ function MostRecentCitywide() {
           <div className="col-md-4 mb-4">
             <div className="card h-100">
               <div className="card-body">
-                <h5 className="card-title">Card 6</h5>
-                <p className="card-text">Custom content for card 6.</p>
+                <h5 className="card-title">Birth Circumstances</h5>
+                <p className="card-text">
+                Premature births (less than 37 weeks gestation):
+                <br/>
+                Caesarean section %:
+                <br/>
+                Multiple births:
+                <br/>
+                Smoking status at time of delivery:
+                <br/>
+                Baby's first feed breastmilk:
+                </p>
               </div>
             </div>
           </div>
@@ -65,8 +89,14 @@ function MostRecentCitywide() {
           <div className="col-md-4 mb-4">
             <div className="card h-100">
               <div className="card-body">
-                <h5 className="card-title">Card 7</h5>
-                <p className="card-text">Custom content for card 7.</p>
+                <h5 className="card-title">Mortality and Morbidity</h5>
+                <p className="card-text">
+                  Ectopic pregnancy admissions rate:
+                  <br/>
+                  Admissions of babies under 14 days:
+                  <br/>
+                  Stillbirth rate:
+                </p>
               </div>
             </div>
           </div>
