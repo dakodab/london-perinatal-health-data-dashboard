@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 // import LondonMap from './components/london.map.experimental';
 import Layout from './components/Layout';
 import MostRecentCitywide from './views/MostRecentCitywide';
-import TrendsCitywide from './views/TrendsCitywide';
+import TrendsCitywide from './views/TrendsCitywide.js';
 import TrendsByBorough from './views/TrendsByBorough.js';
 import MostRecentBorough from './views/MostRecentBorough';
 
