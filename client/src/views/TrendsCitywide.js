@@ -8,7 +8,20 @@ function TrendsCitywide() {
       {/* First full-width card */}
       <div className="card mb-4">
         <div className="card-body">
-          <p>Card 1 – placeholder</p>
+          {/* Select Indicator */}
+          <label htmlFor="indicator-select" className="me-2">Select an indicator:</label>
+          <select className="form-select d-inline-block w-auto"
+            id="indicator-select"
+            value={selectedIndicatorId}
+            onChange={(e) => setSelectedIndicatorId(e.target.value)}
+            style={{ fontSize: '0.9rem', height: '2.2rem', padding: '2px 10px', minWidth: '220px' }}
+          >
+            {indicatorList.map((indicator) => (
+              <option key={indicator.id} value={indicator.id}>
+                {indicator.name}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
 
