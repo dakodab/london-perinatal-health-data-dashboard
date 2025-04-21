@@ -3,8 +3,6 @@ import * as d3 from 'd3';
 
 function TrendsCitywide({ 
   indicatorList, 
-  selectedIndicatorId, 
-  setSelectedIndicatorId 
 }) {
 
   const [trendData, setTrendData] = useState([]);
