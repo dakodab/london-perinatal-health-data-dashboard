@@ -21,13 +21,10 @@ function TrendsByBorough({
     const margin = { top: 20, right: 30, bottom: 30, left: 40 };
   
     // mock data //
-    const data = [
-      { year: 2018, value: 45 },
-      { year: 2019, value: 60 },
-      { year: 2020, value: 52 },
-      { year: 2021, value: 70 },
-      { year: 2022, value: 65 }
-    ];
+    const data = trendData.map(d => ({
+      year: parseInt(d.time_period),
+      value: Number(d.value)
+    }));
   
     const x = d3.scaleLinear()
       .domain(d3.extent(data, d => d.year))
@@ -57,7 +54,7 @@ function TrendsByBorough({
       .attr('stroke', '#2b4eff')
       .attr('stroke-width', 2)
       .attr('d', line);
-  }, []);
+    }, [trendData]);
 
   useEffect(() => {
     if (!selectedIndicatorId || !selectedBoroughCode) return;
