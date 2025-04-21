@@ -59,7 +59,7 @@ function TrendsByBorough({
   useEffect(() => {
     if (!selectedIndicatorId || !selectedBoroughCode) return;
   
-    fetch(`/api/railway/trends/${selectedIndicatorId}/${selectedBoroughCode}`)
+    fetch(`https://fingertips-production-ca6d.up.railway.app/api/railway/trends/${selectedIndicatorId}/${selectedBoroughCode}`)
       .then(res => res.json())
       .then(data => {
         console.log("Fetched trend data:", data);
