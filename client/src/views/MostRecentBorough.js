@@ -81,15 +81,6 @@ const MostRecentBorough = ({
           </div>
         </div>
       </div>
-      <p>
-        Source:{' '}
-        <a href="https://www.gov.uk/government/organisations/office-for-health-improvement-and-disparities">
-          Office for Health Improvement and Disparities
-        </a>{' '}
-        -{' '}
-        <a href="https://fingertips.phe.org.uk/">Public Health Profiles</a>, via{' '}
-        <a href="https://fingertips.phe.org.uk/api">Fingertips API</a>
-      </p>
     </div>
   );
 };
