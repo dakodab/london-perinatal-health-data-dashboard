@@ -71,7 +71,7 @@ function TrendsCitywide() {
   useEffect(() => {
     if (!selectedIndicatorId) return;
   
-    fetch(`https://fingertips-production-ca6d.up.railway.app/api/trends?indicatorId=${selectedIndicatorId}&areaCode=E12000007`)
+    fetch(`https://fingertips-production-ca6d.up.railway.app/api/railway/trends/${selectedIndicatorId}/E12000007`)
       .then((res) => res.json())
       .then((data) => {
         setTrendData(data); // Assuming you have this state
