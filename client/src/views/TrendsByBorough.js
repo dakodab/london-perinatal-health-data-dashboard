@@ -1,7 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 
-function TrendsByBorough({ indicatorList, selectedIndicatorId, setSelectedIndicatorId }) {
+function TrendsByBorough({
+  indicatorList,
+  selectedIndicatorId,
+  setSelectedIndicatorId,
+  boroughList,
+  selectedBoroughCode,
+  setSelectedBoroughCode
+}) {
   const chartRef = useRef();
   
   useEffect(() => {
@@ -77,13 +84,18 @@ function TrendsByBorough({ indicatorList, selectedIndicatorId, setSelectedIndica
 
             {/* Select Borough */}
             <label htmlFor="borough-select" className="me-2">Select a borough:</label>
-            <select className="form-select d-inline-block w-auto"
+            <select 
+              className="form-select d-inline-block w-auto"
               id="borough-select"
+              value={selectedBoroughCode} 
+              onChange={(e) => setSelectedBoroughCode(e.target.value)}
               style={{ fontSize: '0.9rem', height: '2.2rem', padding: '2px 10px', minWidth: '220px' }}
             >
-              <option value="">Borough 1</option>
-              <option value="">Borough 2</option>
-              {/* Replace with dynamic options as needed */}
+              {boroughList.map((borough) => (
+                <option key={borough.code} value={borough.code}>
+                  {borough.name}
+                </option>
+              ))}
             </select>
         </div>
       </div>

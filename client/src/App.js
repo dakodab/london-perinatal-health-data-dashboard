@@ -7,6 +7,7 @@ import TrendsCitywide from './views/TrendsCitywide';
 import TrendsByBorough from './views/TrendsByBorough.js';
 import MostRecentBorough from './views/MostRecentBorough';
 
+// this is already in the data, but static is better to prevent crashing from too much memory use //
 const indicatorList = [
   { id: '90731', name: 'Low Birth Weight (alt method)', unit: ' per 1,000', rows: 768 },
   { id: '20401', name: 'Under 18s conception rate', unit: ' per 1,000', rows: 768 }, // note - this data is hidden in some places - consider ethical implications
@@ -28,6 +29,43 @@ const indicatorList = [
   { id: '93932', name: "Baby's first feed breastmilk", unit: '%', rows: 140 },  // note - this data is hidden in some places - reason unclear
 ];
 
+// this is already in the data, but static is better to prevent crashing from too much memory use //
+const boroughList = [
+  { code: 'E09000001', name: 'City of London' },
+  { code: 'E09000002', name: 'Barking and Dagenham' },
+  { code: 'E09000003', name: 'Barnet' },
+  { code: 'E09000004', name: 'Bexley' },
+  { code: 'E09000005', name: 'Brent' },
+  { code: 'E09000006', name: 'Bromley' },
+  { code: 'E09000007', name: 'Camden' },
+  { code: 'E09000008', name: 'Croydon' },
+  { code: 'E09000009', name: 'Ealing' },
+  { code: 'E09000010', name: 'Enfield' },
+  { code: 'E09000011', name: 'Greenwich' },
+  { code: 'E09000012', name: 'Hackney' },
+  { code: 'E09000013', name: 'Hammersmith and Fulham' },
+  { code: 'E09000014', name: 'Haringey' },
+  { code: 'E09000015', name: 'Harrow' },
+  { code: 'E09000016', name: 'Havering' },
+  { code: 'E09000017', name: 'Hillingdon' },
+  { code: 'E09000018', name: 'Hounslow' },
+  { code: 'E09000019', name: 'Islington' },
+  { code: 'E09000020', name: 'Kensington and Chelsea' },
+  { code: 'E09000021', name: 'Kingston upon Thames' },
+  { code: 'E09000022', name: 'Lambeth' },
+  { code: 'E09000023', name: 'Lewisham' },
+  { code: 'E09000024', name: 'Merton' },
+  { code: 'E09000025', name: 'Newham' },
+  { code: 'E09000026', name: 'Redbridge' },
+  { code: 'E09000027', name: 'Richmond upon Thames' },
+  { code: 'E09000028', name: 'Southwark' },
+  { code: 'E09000029', name: 'Sutton' },
+  { code: 'E09000030', name: 'Tower Hamlets' },
+  { code: 'E09000031', name: 'Waltham Forest' },
+  { code: 'E09000032', name: 'Wandsworth' },
+  { code: 'E09000033', name: 'Westminster' },
+];
+
 function App() {
   // useState - holds the Early Access to Maternity Care rows //
   const [indicatorData, setIndicatorData] = useState(null);
@@ -41,6 +79,9 @@ function App() {
 
   // use state track which part of the dashboard should be shown //
   const [activeSection, setActiveSection] = useState('recent-borough');
+
+  // use state track current borough //
+  const [selectedBoroughCode, setSelectedBoroughCode] = useState(boroughList[0].code);
 
   // for test //
   console.log("Currently active section:", activeSection);
@@ -90,7 +131,7 @@ function App() {
     <Layout
       setActiveSection={setActiveSection}
       activeSection={activeSection}>
-        
+
     {activeSection === 'recent-citywide' && (
       <MostRecentCitywide />
     )}
@@ -116,6 +157,9 @@ function App() {
         indicatorList={indicatorList}
         selectedIndicatorId={selectedIndicatorId}
         setSelectedIndicatorId={setSelectedIndicatorId}
+        boroughList={boroughList}
+        selectedBoroughCode={selectedBoroughCode}
+        setSelectedBoroughCode={setSelectedBoroughCode}
       />
     )}
   </Layout>
