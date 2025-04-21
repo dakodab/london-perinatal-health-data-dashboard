@@ -5,7 +5,7 @@ function MostRecentCitywide() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5001/api/railway/latest-indicators/citywide')
+    axios.get('https://fingertips-production-ca6d.up.railway.app/api/railway/latest-indicators/citywide')
       .then(res => setData(res.data))
       .catch(err => console.error('Error:', err));
   }, []);
