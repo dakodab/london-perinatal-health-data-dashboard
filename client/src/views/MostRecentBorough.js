@@ -12,12 +12,12 @@ const MostRecentBorough = ({
 }) => {
   return (
     <div className="container mt-4">
+      <h4 className="mb-3">
+        {`${indicatorList.find((item) => item.id === selectedIndicatorId)?.name || 'Selected Indicator'}, ${indicatorData.title.split(', ')[1]} `}
+      </h4>
       <div className="card mb-4">
         <div className="card-body p-2" style={{ fontSize: '0.85rem', overflowX: 'auto' }}>
           <div>
-            <h5 className="mb-3">
-              {`${indicatorList.find((item) => item.id === selectedIndicatorId)?.name || 'Selected Indicator'}, ${indicatorData.title.split(', ')[1]} `}
-            </h5>
             <label htmlFor="indicator-select" className="me-2">Select an indicator: </label>
             <select className="form-select d-inline-block w-auto"
               id="indicator-select"
