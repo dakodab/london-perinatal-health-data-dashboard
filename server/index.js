@@ -118,6 +118,28 @@ app.get('/api/railway/trends/city/:indicatorId', (req, res) => {
   });
 });
 
+app.get('/api/railway/latest-indicators/citywide', (req, res) => {
+  const sql = `
+    SELECT sub.indicator_id, sub.value, sub.time_period
+    FROM (
+        SELECT i.indicator_id, i.value, i.time_period,
+               ROW_NUMBER() OVER (PARTITION BY i.indicator_id ORDER BY i.time_period DESC) AS rn
+        FROM indicators i
+        WHERE i.area_code = 'E12000007'
+    ) sub
+    WHERE sub.rn = 1
+  `;
+
+  connection.query(sql, (err, results) => {
+    if (err) {
+      console.error('❌ Error fetching latest citywide indicators:', err);
+      return res.status(500).json({ error: 'Database error' });
+    }
+
+    res.json(results);
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
