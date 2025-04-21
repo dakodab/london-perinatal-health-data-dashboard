@@ -133,7 +133,7 @@ function App() {
       activeSection={activeSection}>
 
     {activeSection === 'recent-citywide' && (
-      <MostRecentCitywide />
+      <MostRecentCitywide indicatorList={indicatorList} />
     )}
 
     {activeSection === 'recent-borough' && (
