@@ -107,6 +107,7 @@ function TrendsByBorough({
             <br /><br />
 
             {/* Select Borough */}
+
             <label htmlFor="borough-select" className="me-2">Select a borough:</label>
             <select 
               className="form-select d-inline-block w-auto"

@@ -82,6 +82,20 @@ function Layout({ children, setActiveSection, activeSection }) {
       <div className="flex-grow-1 p-4 bg-light" style={{ overflowY: 'auto' }}>
         {children} {/* This will render whatever content is passed into <Layout> from App.js */}
       </div>
+      
+      <div>
+        <p>
+          Source:{' '}
+          <a href="https://www.gov.uk/government/organisations/office-for-health-improvement-and-disparities">
+            Office for Health Improvement and Disparities
+          </a>{' '}
+          -{' '}
+          <a href="https://fingertips.phe.org.uk/">Public Health Profiles</a>, via{' '}
+          <a href="https://fingertips.phe.org.uk/api">Fingertips API</a>
+        </p>
+      </div>
+
+
     </div>
   );
 }
