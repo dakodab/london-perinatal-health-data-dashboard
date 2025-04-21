@@ -8,7 +8,6 @@ function TrendsCitywide() {
 
   const indicatorId = "90362";
   const indicatorName = "Breastfeeding at 6–8 weeks";
-  const indicatorUnit = "%";
 
   useEffect(() => {
     axios
