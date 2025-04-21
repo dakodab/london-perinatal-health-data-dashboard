@@ -8,14 +8,23 @@ function TrendsByBorough() {
       {/* First full-width card */}
       <div className="card mb-4">
         <div className="card-body">
-          <label htmlFor="indicator-select">Select an indicator:</label>
-            <select
+          <label htmlFor="indicator-select" className="me-2">Select an indicator:</label>
+            <select className="form-select d-inline-block w-auto"
               id="indicator-select"
-              className="form-select"
               style={{ fontSize: '0.9rem', height: '2rem', padding: '2px 6px' }}
             >
               <option value="">Indicator 1</option>
               <option value="">Indicator 2</option>
+              {/* Replace with dynamic options as needed */}
+            </select>
+
+            <label htmlFor="borough-select" className="me-2">Select a borough:</label>
+            <select className="form-select d-inline-block w-auto"
+              id="borough-select"
+              style={{ fontSize: '0.9rem', height: '2rem', padding: '2px 6px' }}
+            >
+              <option value="">Borough 1</option>
+              <option value="">Borough 2</option>
               {/* Replace with dynamic options as needed */}
             </select>
         </div>
