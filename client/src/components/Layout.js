@@ -80,21 +80,20 @@ function Layout({ children, setActiveSection, activeSection }) {
       {/* Main content area where all the dashboard content appears */}
       {/* "flex-grow-1" makes this take up the rest of the space beside the sidebar - overflow allows main content to scroll*/}
       <div className="flex-grow-1 p-4 bg-light" style={{ overflowY: 'auto' }}>
-        {children} {/* This will render whatever content is passed into <Layout> from App.js */}
+          {children} {/* This will render whatever content is passed into <Layout> from App.js */}
+          
+          <div>
+          <p>
+            Source:{' '}
+            <a href="https://www.gov.uk/government/organisations/office-for-health-improvement-and-disparities">
+              Office for Health Improvement and Disparities
+            </a>{' '}
+            -{' '}
+            <a href="https://fingertips.phe.org.uk/">Public Health Profiles</a>, via{' '}
+            <a href="https://fingertips.phe.org.uk/api">Fingertips API</a>
+          </p>
+        </div>
       </div>
-      
-      <div>
-        <p>
-          Source:{' '}
-          <a href="https://www.gov.uk/government/organisations/office-for-health-improvement-and-disparities">
-            Office for Health Improvement and Disparities
-          </a>{' '}
-          -{' '}
-          <a href="https://fingertips.phe.org.uk/">Public Health Profiles</a>, via{' '}
-          <a href="https://fingertips.phe.org.uk/api">Fingertips API</a>
-        </p>
-      </div>
-
 
     </div>
   );
