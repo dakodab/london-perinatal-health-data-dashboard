@@ -75,13 +75,13 @@ function App() {
   const [sortAsc, setSortAsc] = useState(true); // true = ascending
 
   // use state - tracks current indicator //
-  const [selectedIndicatorId, setSelectedIndicatorId] = useState('94121');
+  const [selectedIndicatorId, setSelectedIndicatorId] = useState('94121'); // makes Early Access to Maternity Care default
 
   // use state track which part of the dashboard should be shown //
   const [activeSection, setActiveSection] = useState('recent-borough');
 
   // use state track current borough (for data over time by borough) //
-  const [selectedBoroughCode, setSelectedBoroughCode] = useState(boroughList[0].code);
+  const [selectedBoroughCode, setSelectedBoroughCode] = useState('E09000028'); // Makes Southwark default
 
   // for test //
   console.log("Currently active section:", activeSection);
