@@ -201,6 +201,28 @@ app.get('/api/railway/trends/:indicatorId/:boroughCode', (req, res) => {
   });
 });
 
+// gets time series data for a citywide indicator (area code: E12000007)
+app.get('/api/railway/trends/city/:indicatorId', (req, res) => {
+  const { indicatorId } = req.params;
+
+  const sql = `
+    SELECT time_period, value
+    FROM indicators
+    WHERE indicator_id = ?
+      AND area_code = 'E12000007'
+    ORDER BY time_period
+  `;
+
+  connection.query(sql, [indicatorId], (err, results) => {
+    if (err) {
+      console.error('❌ Error in city trends query:', err);
+      return res.status(500).json({ error: 'Database error (city trends)' });
+    }
+
+    res.json(results);
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
