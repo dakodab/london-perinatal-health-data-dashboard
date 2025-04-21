@@ -179,6 +179,28 @@ app.get('/api/railway/indicator/:id', (req, res) => {
   });
 });
 
+// gets value and year data to populate line graph, given borough and indicator //
+app.get('/api/railway/trends/:indicatorId/:boroughCode', (req, res) => {
+  const { indicatorId, boroughCode } = req.params;
+
+  const sql = `
+    SELECT time_period, value
+    FROM indicators
+    WHERE indicator_id = ?
+      AND area_code = ?
+    ORDER BY time_period
+  `;
+
+  connection.query(sql, [indicatorId, boroughCode], (err, results) => {
+    if (err) {
+      console.error('❌ Error in trends query:', err);
+      return res.status(500).json({ error: 'Database error' });
+    }
+
+    res.json(results);
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });

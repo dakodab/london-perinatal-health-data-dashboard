@@ -10,6 +10,7 @@ function TrendsByBorough({
   setSelectedBoroughCode
 }) {
   const chartRef = useRef();
+  const [trendData, setTrendData] = useState([]);
   
   useEffect(() => {
     const svg = d3.select(chartRef.current);
@@ -57,6 +58,22 @@ function TrendsByBorough({
       .attr('stroke-width', 2)
       .attr('d', line);
   }, []);
+
+  useEffect(() => {
+    if (!selectedIndicatorId || !selectedBoroughCode) return;
+  
+    fetch(`/api/railway/trends/${selectedIndicatorId}/${selectedBoroughCode}`)
+      .then(res => res.json())
+      .then(data => {
+        console.log("Fetched trend data:", data);
+        setTrendData(data);
+      })
+      .catch(err => {
+        console.error("Error fetching trend data:", err);
+      });
+  }, [selectedIndicatorId, selectedBoroughCode]);
+
+
   return (
     <div className="text-start">
       <h2>Data Over Time By Borough</h2>
