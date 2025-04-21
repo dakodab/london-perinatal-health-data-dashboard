@@ -10,7 +10,7 @@ function TrendsByBorough({
   setSelectedBoroughCode
 }) {
   const chartRef = useRef();
-  const [trendData, setTrendData] = useState([]);
+  // const [trendData, setTrendData] = useState([]);
   
   useEffect(() => {
     const svg = d3.select(chartRef.current);
