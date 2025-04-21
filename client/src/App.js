@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 // import axios from 'axios'; // not currently being used? //
-import LondonMap from './components/london.map.experimental';
+// import LondonMap from './components/london.map.experimental';
 import Layout from './components/Layout';
 import MostRecentCitywide from './views/MostRecentCitywide';
 import TrendsCitywide from './views/TrendsCitywide';
