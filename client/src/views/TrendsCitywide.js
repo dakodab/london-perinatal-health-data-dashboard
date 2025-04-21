@@ -9,7 +9,7 @@ function TrendsCitywide() {
   const chartRef = useRef();
 
   useEffect(() => {
-    fetch('https://fingertips-production-ca6d.up.railway.app/api/indicators')
+    fetch('https://fingertips-production-ca6d.up.railway.app/api/railway/indicators')
       .then((res) => res.json())
       .then((data) => setIndicatorList(data))
       .catch((err) => console.error('Error fetching indicators:', err));
