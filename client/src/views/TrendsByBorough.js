@@ -12,7 +12,7 @@ function TrendsByBorough() {
 
           {/* Select Indicator */}
           <label htmlFor="indicator-select" className="me-2">Select an indicator:</label>
-            <select className="form-select d-inline-block"
+            <select className="form-select d-inline-block w-auto"
               id="indicator-select"
               style={{ fontSize: '0.9rem', height: '2.2rem', padding: '2px 10px', minWidth: '220px' }}
             >
@@ -25,7 +25,7 @@ function TrendsByBorough() {
 
             {/* Select Borough */}
             <label htmlFor="borough-select" className="me-2">Select a borough:</label>
-            <select className="form-select d-inline-block"
+            <select className="form-select d-inline-block w-auto"
               id="borough-select"
               style={{ fontSize: '0.9rem', height: '2.2rem', padding: '2px 10px', minWidth: '220px' }}
             >
