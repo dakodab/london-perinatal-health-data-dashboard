@@ -149,7 +149,11 @@ function App() {
     )}
 
     {activeSection === 'trends-city' && (
-      <TrendsCitywide />
+      <TrendsCitywide
+        indicatorList={indicatorList}
+        selectedIndicatorId={selectedIndicatorId}
+        setSelectedIndicatorId={setSelectedIndicatorId}
+      />
     )}
 
     {activeSection === 'trends-borough' && (

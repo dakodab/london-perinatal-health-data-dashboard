@@ -20,7 +20,7 @@ function TrendsByBorough({
     const height = 300;
     const margin = { top: 20, right: 30, bottom: 30, left: 40 };
   
-    // mock data //
+    // data //
     const data = trendData.map(d => ({
       year: parseInt(d.time_period),
       value: Number(d.value)

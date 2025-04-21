@@ -1,19 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 
-function TrendsCitywide() {
+function TrendsCitywide({ 
+  indicatorList, 
+  selectedIndicatorId, 
+  setSelectedIndicatorId 
+}) {
 
   const [trendData, setTrendData] = useState([]);
-  const [indicatorList, setIndicatorList] = useState([]);
   const [selectedIndicatorId, setSelectedIndicatorId] = useState('');
   const chartRef = useRef();
 
-  useEffect(() => {
-    fetch('https://fingertips-production-ca6d.up.railway.app/api/railway/indicators')
-      .then((res) => res.json())
-      .then((data) => setIndicatorList(data))
-      .catch((err) => console.error('Error fetching indicators:', err));
-  }, []);
   
   useEffect(() => {
     const svg = d3.select(chartRef.current);
@@ -23,7 +20,7 @@ function TrendsCitywide() {
     const height = 300;
     const margin = { top: 20, right: 30, bottom: 30, left: 40 };
   
-    // mock data //
+    // data //
     const data = trendData.map(d => ({
       year: parseInt(d.time_period),
       value: Number(d.value)
@@ -73,24 +70,26 @@ function TrendsCitywide() {
   
     fetch(`https://fingertips-production-ca6d.up.railway.app/api/railway/trends/city/${selectedIndicatorId}`)
       .then((res) => res.json())
-      .then((data) => {
-        setTrendData(data); // Assuming you have this state
+      .then(data => {
+        console.log("Fetched trend data:", data);
+        setTrendData(data);
       })
-      .catch((error) => {
-        console.error('Error fetching citywide trend data:', error);
+      .catch(err => {
+        console.error('Error fetching citywide trend data:', err);
       });
   }, [selectedIndicatorId]);
+
+  console.log('Trend data is ready:', trendData);
 
   return (
     <div className="text-start">
       <h2>Citywide Data Over Time</h2>
-      <p>This section will show citywide-level statistics over time.</p>
+      
       {/* First full-width card */}
       <div className="card mb-4">
         <div className="card-body">
           {/* Select Indicator */}
           <label htmlFor="indicator-select" className="me-2">Select an indicator:</label>
-          {indicatorList.length > 0 && (
             <select className="form-select d-inline-block w-auto"
               id="indicator-select"
               value={selectedIndicatorId}
@@ -103,7 +102,6 @@ function TrendsCitywide() {
                 </option>
               ))}
             </select>
-          )}
         </div>
       </div>
 
