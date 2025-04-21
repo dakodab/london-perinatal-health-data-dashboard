@@ -48,12 +48,21 @@ function TrendsByBorough({
       .attr('transform', `translate(${margin.left},0)`)
       .call(d3.axisLeft(y));
   
-    svg.append('path')
+    svg.append('path')                // draw the line
       .datum(data)
       .attr('fill', 'none')
-      .attr('stroke', '#2b4eff')
+      .attr('stroke', '#2b4eff')      // line color
       .attr('stroke-width', 2)
       .attr('d', line);
+
+    svg.selectAll("circle")           // data points as dots on line
+      .data(data)
+      .enter()
+      .append("circle")
+      .attr("cx", d => x(d.year))     // x-position based on year
+      .attr("cy", d => y(d.value))    // y-position based on value
+      .attr("r", 4)                   // radius of the dot
+      .attr("fill", "#2b4eff");       // dot color (same as line)
     }, [trendData]);
 
   useEffect(() => {
@@ -132,6 +141,9 @@ function TrendsByBorough({
               </p>
             </>
             )}
+
+            
+            
           </>
         )}
         </div>
