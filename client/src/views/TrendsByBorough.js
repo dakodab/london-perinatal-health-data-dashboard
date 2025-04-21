@@ -118,7 +118,11 @@ function TrendsByBorough({
       {/* Line Chart */}
       <div className="card mb-4">
         <div className="card-body">
-          <svg ref={chartRef} style={{ width: '100%', height: '300px' }}></svg>
+          {trendData.length === 0 ? (
+            <p>No data available for this combination.</p>
+          ) : (
+            <svg ref={chartRef} style={{ width: '100%', height: '300px' }}></svg>
+          )}
         </div>
       </div>
     </div>
