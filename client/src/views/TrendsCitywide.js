@@ -2,11 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 
 function TrendsCitywide({ 
-  indicatorList, 
+  indicatorList,
+  selectedIndicatorId,
+  setSelectedIndicatorId
 }) {
 
   const [trendData, setTrendData] = useState([]);
-  const [selectedIndicatorId, setSelectedIndicatorId] = useState('');
   const chartRef = useRef();
 
   
