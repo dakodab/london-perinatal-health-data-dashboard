@@ -118,11 +118,22 @@ function TrendsByBorough({
       {/* Line Chart */}
       <div className="card mb-4">
         <div className="card-body">
-          {trendData.length === 0 ? (
-            <p>No data available for this combination.</p>
-          ) : (
-            <svg ref={chartRef} style={{ width: '100%', height: '300px' }}></svg>
-          )}
+        {trendData.length === 0 ? (
+          <p>No data available for this combination.</p>
+        ) : (
+          <>
+            {trendData.length > 0 && (
+            <>
+              <svg ref={chartRef} style={{ width: '100%', height: '300px' }}></svg>
+              <p className="mt-3 mb-0" style={{ fontSize: '0.9rem', color: '#333' }}>
+                {indicatorList.find(i => i.id === selectedIndicatorId)?.name} in {
+                 boroughList.find(b => b.code === selectedBoroughCode)?.name
+                }
+              </p>
+            </>
+            )}
+          </>
+        )}
         </div>
       </div>
     </div>
