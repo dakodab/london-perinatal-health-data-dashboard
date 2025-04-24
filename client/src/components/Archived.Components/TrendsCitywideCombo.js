@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 
-function TrendsCitywide({ 
+function TrendsCitywideCombo({ 
   indicatorList,
   selectedIndicatorId,
   setSelectedIndicatorId
@@ -20,13 +20,13 @@ function TrendsCitywide({
   
     // data //
     const data = trendData.map(d => ({
-      year: parseInt(d.time_period),
+      year: d.time_period,  // just treat it as a label
       value: Number(d.value)
     }));
   
-    const x = d3.scaleLinear()
-      .domain(d3.extent(data, d => d.year))
-      .range([margin.left, width - margin.right]);
+    const x = d3.scalePoint()
+        .domain(data.map(d => d.year))
+        .range([margin.left, width - margin.right]);
   
     const y = d3.scaleLinear()
       .domain([0, d3.max(data, d => d.value)]).nice()
@@ -40,7 +40,7 @@ function TrendsCitywide({
   
     svg.append('g')
       .attr('transform', `translate(0,${height - margin.bottom})`)
-      .call(d3.axisBottom(x).ticks(data.length).tickFormat(d3.format('d')));
+      .call(d3.axisBottom(x));
   
     svg.append('g')
       .attr('transform', `translate(${margin.left},0)`)
@@ -66,7 +66,7 @@ function TrendsCitywide({
   useEffect(() => {
     if (!selectedIndicatorId) return;
   
-    fetch(`https://fingertips-production-ca6d.up.railway.app/api/railway/trends/city/${selectedIndicatorId}`)
+    fetch(`${process.env.REACT_APP_API_URL}/api/railway/history/citywide/${selectedIndicatorId}`)
       .then((res) => res.json())
       .then(data => {
         console.log("Fetched trend data:", data);
@@ -127,4 +127,4 @@ function TrendsCitywide({
   );
 }
 
-export default TrendsCitywide;
+export default TrendsCitywideCombo;

@@ -1,5 +1,6 @@
 import React from 'react';
 import LondonMap from '../components/london.map.experimental';
+import ExpandedIndicatorData from '../utils/expanded.indicator.data';
 
 const MostRecentBorough = ({
   indicatorList,
@@ -10,10 +11,16 @@ const MostRecentBorough = ({
   sortAsc,
   sortByValue,
 }) => {
+
+const selectedIndicatorName =
+  indicatorList.find((item) => item.id === selectedIndicatorId)?.name || 'Selected Indicator';
+
+const timePeriod = indicatorData?.title?.split(', ')[1] || '';
+
   return (
     <div className="container mt-4">
       <h2 className="mb-3">
-        {`${indicatorList.find((item) => item.id === selectedIndicatorId)?.name || 'Selected Indicator'}, ${indicatorData.title.split(', ')[1]} `}
+        {`${selectedIndicatorName}, ${timePeriod}`}
       </h2>
       <div className="card mb-4">
         <div className="card-body p-2" style={{ fontSize: '0.85rem', overflowX: 'auto' }}>
@@ -49,7 +56,7 @@ const MostRecentBorough = ({
                     </tr>
                   </thead>
                   <tbody>
-                    {(sortedIndicatorData ? sortedIndicatorData.rows : indicatorData.rows).map((row) => (
+                    {(sortedIndicatorData?.rows || indicatorData?.rows || []).map((row) => (
                       <tr key={row.area_name}>
                         <td>
                           {row.area_name === 'Hackney'
@@ -71,6 +78,7 @@ const MostRecentBorough = ({
         </div>
 
         <div className="col-12 col-md-7">
+
           <div className="card mb-4">
             <div className="card-body p-2" style={{ fontSize: '0.85rem', overflowX: 'auto' }}>
               <LondonMap
@@ -79,8 +87,42 @@ const MostRecentBorough = ({
               />
             </div>
           </div>
+
+          <div className="card mb-4">
+            <div className="card-body p-2" style={{ fontSize: '0.85rem' }}>
+              {(() => {
+                const selected = ExpandedIndicatorData.find(ind => ind.id === selectedIndicatorId);
+                if (!selected) return null;
+
+                return (
+                  <>
+                    <h5>{selected.name}</h5>
+                    {selected.definition && (
+                      <p><strong>Definition:</strong> {selected.definition}</p>
+                    )}
+                    {selected.rationale && (
+                      <p><strong>Rationale:</strong> {selected.rationale}</p>
+                    )}
+                    {selected.disclosure_control && (
+                      <p><strong>Disclosure Control:</strong> {selected.disclosure_control}</p>
+                    )}
+                    {selected.caveats && (
+                      <p><strong>Caveats:</strong> {selected.caveats}</p>
+                    )}
+                    {selected.notes && (
+                      <p><strong>Notes:</strong> {selected.notes}</p>
+                    )}
+                  </>
+                );
+              })()}
+            </div>
+          </div>
+
+
+
         </div>
       </div>
+
     </div>
   );
 };

@@ -105,7 +105,7 @@ function App() {
  // useEffect - Fetch data for the selected indicator //
   useEffect(() => {
     // fetch filtered rows for the selected indicator from Express API
-    fetch(`https://fingertips-production-ca6d.up.railway.app/api/railway/indicator/${selectedIndicatorId}`)
+    fetch(`${process.env.REACT_APP_API_URL}/api/railway/indicator/${selectedIndicatorId}`)
       .then(res => res.json())
       .then(json => {
         // console.log(`Fetched data for indicator ${selectedIndicatorId}:`, json);
@@ -150,6 +150,7 @@ function App() {
 
     {activeSection === 'trends-city' && (
       <TrendsCitywide
+        indicatorList={indicatorList} 
       />
     )}
 
