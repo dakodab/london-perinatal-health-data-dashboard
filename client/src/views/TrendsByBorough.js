@@ -181,11 +181,6 @@ function TrendsByBorough({
                 style={{ width: '100%', height: '60vh', maxHeight: '600px', display: 'block', margin: '0 auto' }}
                 preserveAspectRatio="xMidYMid meet"
               ></svg>
-              <p className="mt-3 mb-0" style={{ fontSize: '0.9rem', color: '#333' }}>
-                {indicatorList.find(i => i.id === selectedIndicatorId)?.name} in {
-                 boroughList.find(b => b.code === selectedBoroughCode)?.name
-                }
-              </p>
             </>
             )}
 

@@ -48,33 +48,30 @@ const timePeriod = indicatorData?.title?.split(', ')[1] || '';
               <div className="table-responsive">
                 <table className="table table-bordered table-sm align-middle">
                   <thead>
-                    <tr>
-                      <th>Borough</th>
-                      <th style={{ cursor: 'pointer', whiteSpace: 'nowrap' }} onClick={sortByValue}>
-                        Value &nbsp;{sortAsc ? '↑' : '↓'}
-                      </th>
-                    </tr>
+                    <th>Borough</th>
+                    <th>Value</th>
                   </thead>
                   <tbody>
-                    {(sortedIndicatorData?.rows || indicatorData?.rows || []).map((row) => (
-                      <tr key={row.area_name}>
-                        <td>
-                          {row.area_name === 'Hackney'
-                            ? 'Hackney (including City of London)'
-                            : row.area_name}
-                        </td>
-                        <td>
-                          {typeof row.value === 'number'
-                            ? `${row.value.toFixed(1)}${indicatorList.find(i => i.id === selectedIndicatorId)?.unit || ''}`
-                            : 'no data'}
-                        </td>
-                      </tr>
+                    {[...new Map(indicatorData?.rows
+                      ?.filter(row => row.value != null)
+                      .map(row => [row.area_name, row])).values()].map((row) => (
+                        <tr key={row.area_name}>
+                          <td>{row.area_name}</td>
+                          <td>{row.value.toFixed(1)}</td>
+                        </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
             </div>
-          </div>
+          </div> 
+
+
+
+
+
+
+
         </div>
 
         <div className="col-12 col-md-7">
