@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import LondonMap from '../components/london.map.experimental';
 import ExpandedIndicatorData from '../utils/expanded.indicator.data';
 
@@ -11,6 +11,20 @@ const MostRecentBorough = ({
   sortAsc,
   sortByValue,
 }) => {
+
+const [sortColumn, setSortColumn] = useState('area_name'); // default sort by Borough
+const [sortOrder, setSortOrder] = useState('asc'); // ascending by default
+
+const handleSort = (column) => {
+  if (sortColumn === column) {
+    // If the user clicks the same column, just flip the sort order
+    setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+  } else {
+    // If a different column is clicked, set that column and default to ascending
+    setSortColumn(column);
+    setSortOrder('asc');
+  }
+};
 
 const selectedIndicatorName =
   indicatorList.find((item) => item.id === selectedIndicatorId)?.name || 'Selected Indicator';
@@ -49,19 +63,40 @@ const timePeriod = indicatorData?.title?.split(', ')[1] || '';
                 <table className="table table-bordered table-sm align-middle">
                   <thead>
                     <tr>
-                      <th>Borough</th>
-                      <th>Value</th>
+                    <th onClick={() => handleSort('area_name')} style={{ cursor: 'pointer' }}>
+                      Borough {sortColumn === 'area_name'
+                        ? (sortOrder === 'asc' ? '↑' : '↓')
+                        : '⇅'}
+                    </th>
+                    <th onClick={() => handleSort('value')} style={{ cursor: 'pointer' }}>
+                      Value {sortColumn === 'value'
+                        ? (sortOrder === 'asc' ? '↑' : '↓')
+                        : '⇅'}
+                    </th>
                     </tr>
                   </thead>
                   <tbody>
-                    {[...new Map(indicatorData?.rows
-                      ?.filter(row => row.value != null)
-                      .map(row => [row.area_name, row])).values()].map((row) => (
-                        <tr key={row.area_name}>
-                          <td>{row.area_name}</td>
-                          <td>{`${row.value.toFixed(1)} ${indicatorList.find(i => i.id === selectedIndicatorId)?.unit || ''}`}</td>
-                        </tr>
-                    ))}
+                  {[...new Map(indicatorData?.rows
+                    ?.filter(row => row.value != null)
+                    .map(row => [row.area_name, row])).values()]
+                    .sort((a, b) => {
+                      if (sortColumn === 'area_name') {
+                        return sortOrder === 'asc'
+                          ? a.area_name.localeCompare(b.area_name)
+                          : b.area_name.localeCompare(a.area_name);
+                      } else if (sortColumn === 'value') {
+                        return sortOrder === 'asc'
+                          ? a.value - b.value
+                          : b.value - a.value;
+                      }
+                      return 0; // fallback if somehow no column matched
+                    })
+                    .map((row) => (
+                      <tr key={row.area_name}>
+                        <td>{row.area_name}</td>
+                        <td>{`${row.value.toFixed(1)} ${indicatorList.find(i => i.id === selectedIndicatorId)?.unit || ''}`}</td>
+                      </tr>
+                  ))}
                   </tbody>
                 </table>
               </div>
