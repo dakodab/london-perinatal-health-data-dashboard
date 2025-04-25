@@ -36,7 +36,7 @@ function MostRecentCitywide({ indicatorList }) {
     ['Percentage of deliveries to women from ethnic minority groups'],
     // 4. Low birth weight group
     [
-      'Low Birth Weight (alt method)',
+      // 'Low Birth Weight (alt method)',
       'Low birth weight of term babies',
       'Low birth weight of all babies',
       'Very low birth weight of all babies'
@@ -68,9 +68,47 @@ function MostRecentCitywide({ indicatorList }) {
     const meta = getIndicatorMeta(row.indicator_id);
     return (
       <div key={row.indicator_id} className="mb-2">
-        <strong style={isLargeTitle ? { fontSize: '1.1rem' } : {}}>
-          {meta ? meta.name : `ID ${row.indicator_id}`}
-        </strong>: {Number(row.value).toFixed(1)} {meta?.unit || ''} ({row.time_period})
+        {meta?.name === 'Early Access to Maternity Care' ? (
+          <div>{`${Math.round(row.value)}% of pregnant people had access to maternity care in their first 10 weeks of pregnancy (`}<em>{row.time_period}</em>{`)`}</div>
+        ) : meta?.name === 'General fertility rate' ? (
+          <div>{`${Math.round(row.value)} in 1,000 females aged 15 to 44 years gave birth (`}<em>{row.time_period}</em>{`)`}</div>
+        ) : meta?.name === 'Under 18s conception rate' ? (
+          <div>{`${Math.round(row.value)} in 1,000 females aged 15–17 became pregnant (`}<em>{row.time_period}</em>{`)`}</div>
+        ) : meta?.name === 'Stillbirth rate' ? (
+          <div>{`${Math.round(row.value)} in 1,000 births were stillbirths (`}<em>{row.time_period}</em>{`)`}</div>
+        ) : meta?.name === 'Low birth weight of term babies' ? (
+          <div>{`${Math.round(row.value)}% of term babies were born weighing less than 2.5kg (`}<em>{row.time_period}</em>{`)`}</div>
+        ) : meta?.name === 'Ectopic pregnancy admissions rate' ? (
+          <div>{`${Math.round(row.value)} in 100,000 women aged 15–44 years were admitted to hospital with an ectopic pregnancy (`}<em>{row.time_period}</em>{`)`}</div>
+        ) : meta?.name === 'Premature births (less than 37 weeks gestation)' ? (
+          <div>{`${Math.round(row.value)} in 1,000 births were premature (`}<em>{row.time_period}</em>{`)`}</div>
+        ) : meta?.name === 'Under 18s births rate' ? (
+          <div>{`${Math.round(row.value)} in 1,000 females aged 15–17 gave birth to a living baby (`}<em>{row.time_period}</em>{`)`}</div>
+        ) : meta?.name === 'Smoking status at time of delivery' ? (
+          <div>{`${Math.round(row.value)}% of mothers were smokers at the time of delivery (`}<em>{row.time_period}</em>{`)`}</div>
+        ) : meta?.name === 'Very low birth weight of all babies' ? (
+          <div>{`${Math.round(row.value)}% of babies were born weighing less than 1.5kg (`}<em>{row.time_period}</em>{`)`}</div>
+        ) : meta?.name === 'Low birth weight of all babies' ? (
+          <div>{`${Math.round(row.value)}% of babies were born weighing less than 2.5kg (`}<em>{row.time_period}</em>{`)`}</div>
+        ) : meta?.name === 'Multiple births' ? (
+          <div>{`${Math.round(row.value)} in 1,000 maternities resulted in multiple births (`}<em>{row.time_period}</em>{`)`}</div>
+        ) : meta?.name === 'Teenage mothers' ? (
+          <div>{`${Number(row.value).toFixed(1)}% of deliveries were to mothers under 18 years old (`}<em>{row.time_period}</em>{`)`}</div>
+        ) : meta?.name === 'Percentage of deliveries to women from ethnic minority groups' ? (
+          <div>{`${Math.round(row.value)}% of deliveries were to women from ethnic minority groups (`}<em>{row.time_period}</em>{`)`}</div>
+        ) : meta?.name === 'Caesarean section %' ? (
+          <div>{`${Math.round(row.value)}% of babies were delivered by c-section (`}<em>{row.time_period}</em>{`)`}</div>
+        ) : meta?.name === 'Admissions of babies under 14 days' ? (
+          <div>{`${Math.round(row.value)} in 1,000 babies were admitted to emergency care before reaching two weeks old (`}<em>{row.time_period}</em>{`)`}</div>
+        ) : meta?.name === "Baby's first feed breastmilk" ? (
+          <div>{`${Math.round(row.value)}% of babies’ first feed was breastmilk (`}<em>{row.time_period}</em>{`)`}</div>
+        ) : (
+          <div>
+            <strong style={isLargeTitle ? { fontSize: '1.1rem' } : {}}>
+              {meta ? meta.name : `ID ${row.indicator_id}`}
+            </strong>: {Math.round(row.value)} {meta?.unit || ''} (<em>{row.time_period}</em>)
+          </div>
+        )}
       </div>
     );
   };
