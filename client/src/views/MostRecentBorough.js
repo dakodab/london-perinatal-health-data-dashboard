@@ -48,8 +48,10 @@ const timePeriod = indicatorData?.title?.split(', ')[1] || '';
               <div className="table-responsive">
                 <table className="table table-bordered table-sm align-middle">
                   <thead>
-                    <th>Borough</th>
-                    <th>Value</th>
+                    <tr>
+                      <th>Borough</th>
+                      <th>Value</th>
+                    </tr>
                   </thead>
                   <tbody>
                     {[...new Map(indicatorData?.rows
@@ -57,7 +59,7 @@ const timePeriod = indicatorData?.title?.split(', ')[1] || '';
                       .map(row => [row.area_name, row])).values()].map((row) => (
                         <tr key={row.area_name}>
                           <td>{row.area_name}</td>
-                          <td>{row.value.toFixed(1)}</td>
+                          <td>{`${row.value.toFixed(1)} ${indicatorList.find(i => i.id === selectedIndicatorId)?.unit || ''}`}</td>
                         </tr>
                     ))}
                   </tbody>
