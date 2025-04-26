@@ -28,7 +28,7 @@ function MostRecentCitywide({ indicatorList }) {
 
   // Cards grouping logic
   const cardGroups = [
-    // 1. Pregnancies
+    // 0. Pregnancies
     [
       'General fertility rate',
       'Percentage of deliveries to women from ethnic minority groups',
@@ -36,11 +36,16 @@ function MostRecentCitywide({ indicatorList }) {
       'Under 18s births rate',
       'Teenage mothers'
     ],
-    // 2. Maternal Health
+    // 1. Maternal Health
     [
       'Early Access to Maternity Care',
       'Ectopic pregnancy admissions rate',
       'Smoking status at time of delivery'
+    ],
+    // 2. Infant Health and Care
+    [
+      "Baby's first feed breastmilk",
+      'Admissions of babies under 14 days'
     ],
     // 3. Birth Outcomes
     [
@@ -51,11 +56,6 @@ function MostRecentCitywide({ indicatorList }) {
       'Very low birth weight of all babies',
       'Premature births (less than 37 weeks gestation)',
       'Stillbirth rate'
-    ],
-    // 4. Infant Health and Care
-    [
-      "Baby's first feed breastmilk",
-      'Admissions of babies under 14 days'
     ]
   ];
 
@@ -112,19 +112,17 @@ function MostRecentCitywide({ indicatorList }) {
   return (
     <div className="container">
       <h2>London Perinatal Health Snapshot</h2>
-      <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
-        {cardGroups.map((names, i) => {
-          const indicators = findByNames(names);
-          if (indicators.length === 0) return null;
-          return (
-            <div className="col" key={i}>
-              <div className="card">
+      <div className="row">
+        <div className="col-md-6 d-flex flex-column gap-4">
+          {[0, 2].map(i => {
+            const indicators = findByNames(cardGroups[i]);
+            if (indicators.length === 0) return null;
+            return (
+              <div className="card" key={i}>
                 <div className="card-body">
                   { i === 0 && <h5 className="card-title">Pregnancies</h5> }
-                  { i === 1 && <h5 className="card-title">Maternal Health</h5> }
-                  { i === 2 && <h5 className="card-title">Birth Outcomes</h5> }
-                  { i === 3 && <h5 className="card-title">Infant Health and Care</h5> }
-                  {names.map(name => {
+                  { i === 2 && <h5 className="card-title">Infant Health and Care</h5> }
+                  {cardGroups[i].map(name => {
                     const row = indicators.find(r => {
                       const meta = getIndicatorMeta(r.indicator_id);
                       return meta && meta.name === name;
@@ -133,9 +131,30 @@ function MostRecentCitywide({ indicatorList }) {
                   })}
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
+        <div className="col-md-6 d-flex flex-column gap-4">
+          {[1, 3].map(i => {
+            const indicators = findByNames(cardGroups[i]);
+            if (indicators.length === 0) return null;
+            return (
+              <div className="card" key={i}>
+                <div className="card-body">
+                  { i === 1 && <h5 className="card-title">Maternal Health</h5> }
+                  { i === 3 && <h5 className="card-title">Birth Outcomes</h5> }
+                  {cardGroups[i].map(name => {
+                    const row = indicators.find(r => {
+                      const meta = getIndicatorMeta(r.indicator_id);
+                      return meta && meta.name === name;
+                    });
+                    return row ? renderIndicator(row, i < 3) : null;
+                  })}
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
