@@ -93,3 +93,21 @@ a:hover {
   width: 100%;
   box-sizing: border-box;
 }
+
+.value-positive {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #0077b6; /* Blue for positive outcomes */
+}
+
+.value-risk {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #f46036; /* Orange for risk indicators */
+}
+
+.value-neutral {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #666666; /* Gray for neutral values */
+}

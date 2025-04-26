@@ -28,38 +28,34 @@ function MostRecentCitywide({ indicatorList }) {
 
   // Cards grouping logic
   const cardGroups = [
-    // 1. Early Access to Maternity Care
-    ['Early Access to Maternity Care'],
-    // 2. General fertility rate
-    ['General fertility rate'],
-    // 3. Percentage of deliveries to women from ethnic minority groups
-    ['Percentage of deliveries to women from ethnic minority groups'],
-    // 4. Low birth weight group
+    // 1. Pregnancies
     [
-      // 'Low Birth Weight (alt method)',
-      'Low birth weight of term babies',
-      'Low birth weight of all babies',
-      'Very low birth weight of all babies'
-    ],
-    // 5. Under 18/teenage group
-    [
+      'General fertility rate',
+      'Percentage of deliveries to women from ethnic minority groups',
       'Under 18s conception rate',
       'Under 18s births rate',
       'Teenage mothers'
     ],
-    // 6. Premature/smoking/feeding group
+    // 2. Maternal Health
     [
-      'Premature births',
-      'Caesarean section',
-      'Multiple births',
-      'Smoking status at time of delivery',
-      "Baby's first feed breastmilk"
-    ],
-    // 7. Ectopic/stillbirth/admissions group
-    [
+      'Early Access to Maternity Care',
       'Ectopic pregnancy admissions rate',
-      'Admissions of babies under 14 days',
+      'Smoking status at time of delivery'
+    ],
+    // 3. Birth Outcomes
+    [
+      'Caesarean section %',
+      'Multiple births',
+      'Low birth weight of all babies',
+      'Low birth weight of term babies',
+      'Very low birth weight of all babies',
+      'Premature births (less than 37 weeks gestation)',
       'Stillbirth rate'
+    ],
+    // 4. Infant Health and Care
+    [
+      "Baby's first feed breastmilk",
+      'Admissions of babies under 14 days'
     ]
   ];
 
@@ -69,44 +65,44 @@ function MostRecentCitywide({ indicatorList }) {
     return (
       <div key={row.indicator_id} className="mb-2">
         {meta?.name === 'Early Access to Maternity Care' ? (
-          <div>{`${Math.round(row.value)}% of pregnant people had access to maternity care in their first 10 weeks of pregnancy (`}<em>{row.time_period}</em>{`)`}</div>
+          <div><span className="value-positive">{Math.round(row.value)}%</span>{` of pregnant people had access to maternity care (`}<em>{row.time_period}</em>{`)`}</div>
         ) : meta?.name === 'General fertility rate' ? (
-          <div>{`${Math.round(row.value)} in 1,000 females aged 15 to 44 years gave birth (`}<em>{row.time_period}</em>{`)`}</div>
+          <div><span className="value-neutral">{Math.round(row.value)}</span>{` in 1,000 females aged 15 to 44 years gave birth (`}<em>{row.time_period}</em>{`)`}</div>
         ) : meta?.name === 'Under 18s conception rate' ? (
-          <div>{`${Math.round(row.value)} in 1,000 females aged 15–17 became pregnant (`}<em>{row.time_period}</em>{`)`}</div>
+          <div><span className="value-neutral">{Math.round(row.value)}</span>{` in 1,000 females aged 15–17 became pregnant (`}<em>{row.time_period}</em>{`)`}</div>
         ) : meta?.name === 'Stillbirth rate' ? (
-          <div>{`${Math.round(row.value)} in 1,000 births were stillbirths (`}<em>{row.time_period}</em>{`)`}</div>
+          <div><span className="value-risk">{Math.round(row.value)}</span>{` in 1,000 births were stillbirths (`}<em>{row.time_period}</em>{`)`}</div>
         ) : meta?.name === 'Low birth weight of term babies' ? (
-          <div>{`${Math.round(row.value)}% of term babies were born weighing less than 2.5kg (`}<em>{row.time_period}</em>{`)`}</div>
+          <div><span className="value-risk">{Math.round(row.value)}%</span>{` of term babies were born weighing less than 2.5kg (`}<em>{row.time_period}</em>{`)`}</div>
         ) : meta?.name === 'Ectopic pregnancy admissions rate' ? (
-          <div>{`${Math.round(row.value)} in 100,000 women aged 15–44 years were admitted to hospital with an ectopic pregnancy (`}<em>{row.time_period}</em>{`)`}</div>
+          <div><span className="value-risk">{Math.round(row.value)}</span>{` in 100,000 women aged 15–44 years were admitted to hospital with an ectopic pregnancy (`}<em>{row.time_period}</em>{`)`}</div>
         ) : meta?.name === 'Premature births (less than 37 weeks gestation)' ? (
-          <div>{`${Math.round(row.value)} in 1,000 births were premature (`}<em>{row.time_period}</em>{`)`}</div>
+          <div><span className="value-risk">{Math.round(row.value)}</span>{` in 1,000 births were premature (`}<em>{row.time_period}</em>{`)`}</div>
         ) : meta?.name === 'Under 18s births rate' ? (
-          <div>{`${Math.round(row.value)} in 1,000 females aged 15–17 gave birth to a living baby (`}<em>{row.time_period}</em>{`)`}</div>
+          <div><span className="value-neutral">{Math.round(row.value)}</span>{` in 1,000 females aged 15–17 gave birth to a living baby (`}<em>{row.time_period}</em>{`)`}</div>
         ) : meta?.name === 'Smoking status at time of delivery' ? (
-          <div>{`${Math.round(row.value)}% of mothers were smokers at the time of delivery (`}<em>{row.time_period}</em>{`)`}</div>
+          <div><span className="value-risk">{Math.round(row.value)}%</span>{` of mothers were smokers at the time of delivery (`}<em>{row.time_period}</em>{`)`}</div>
         ) : meta?.name === 'Very low birth weight of all babies' ? (
-          <div>{`${Math.round(row.value)}% of babies were born weighing less than 1.5kg (`}<em>{row.time_period}</em>{`)`}</div>
+          <div><span className="value-risk">{Math.round(row.value)}%</span>{` of babies were born weighing less than 1.5kg (`}<em>{row.time_period}</em>{`)`}</div>
         ) : meta?.name === 'Low birth weight of all babies' ? (
-          <div>{`${Math.round(row.value)}% of babies were born weighing less than 2.5kg (`}<em>{row.time_period}</em>{`)`}</div>
+          <div><span className="value-risk">{Math.round(row.value)}%</span>{` of babies were born weighing less than 2.5kg (`}<em>{row.time_period}</em>{`)`}</div>
         ) : meta?.name === 'Multiple births' ? (
-          <div>{`${Math.round(row.value)} in 1,000 maternities resulted in multiple births (`}<em>{row.time_period}</em>{`)`}</div>
+          <div><span className="value-neutral">{Math.round(row.value)}</span>{` in 1,000 maternities resulted in multiple births (`}<em>{row.time_period}</em>{`)`}</div>
         ) : meta?.name === 'Teenage mothers' ? (
-          <div>{`${Number(row.value).toFixed(1)}% of deliveries were to mothers under 18 years old (`}<em>{row.time_period}</em>{`)`}</div>
+          <div><span className="value-neutral">{Number(row.value).toFixed(1)}%</span>{` of deliveries were to mothers under 18 years old (`}<em>{row.time_period}</em>{`)`}</div>
         ) : meta?.name === 'Percentage of deliveries to women from ethnic minority groups' ? (
-          <div>{`${Math.round(row.value)}% of deliveries were to women from ethnic minority groups (`}<em>{row.time_period}</em>{`)`}</div>
+          <div><span className="value-neutral">{Math.round(row.value)}%</span>{` of deliveries were to women from ethnic minority groups (`}<em>{row.time_period}</em>{`)`}</div>
         ) : meta?.name === 'Caesarean section %' ? (
-          <div>{`${Math.round(row.value)}% of babies were delivered by c-section (`}<em>{row.time_period}</em>{`)`}</div>
+          <div><span className="value-neutral">{Math.round(row.value)}%</span>{` of babies were delivered by c-section (`}<em>{row.time_period}</em>{`)`}</div>
         ) : meta?.name === 'Admissions of babies under 14 days' ? (
-          <div>{`${Math.round(row.value)} in 1,000 babies were admitted to emergency care before reaching two weeks old (`}<em>{row.time_period}</em>{`)`}</div>
+          <div><span className="value-risk">{Math.round(row.value)}</span>{` in 1,000 babies were admitted to emergency care before reaching two weeks old (`}<em>{row.time_period}</em>{`)`}</div>
         ) : meta?.name === "Baby's first feed breastmilk" ? (
-          <div>{`${Math.round(row.value)}% of babies’ first feed was breastmilk (`}<em>{row.time_period}</em>{`)`}</div>
+          <div><span className="value-neutral">{Math.round(row.value)}%</span>{` of babies’ first feed was breastmilk (`}<em>{row.time_period}</em>{`)`}</div>
         ) : (
           <div>
             <strong style={isLargeTitle ? { fontSize: '1.1rem' } : {}}>
               {meta ? meta.name : `ID ${row.indicator_id}`}
-            </strong>: {Math.round(row.value)} {meta?.unit || ''} (<em>{row.time_period}</em>)
+            </strong>: <span>{Math.round(row.value)}</span> {meta?.unit || ''} (<em>{row.time_period}</em>)
           </div>
         )}
       </div>
@@ -124,11 +120,17 @@ function MostRecentCitywide({ indicatorList }) {
             <div className="col" key={i}>
               <div className="card">
                 <div className="card-body">
-                  {i === 3 && <h5 className="card-title">Birth Weight</h5>}
-                  {i === 4 && <h5 className="card-title">Teenage Pregnancy and Birth</h5>}
-                  {i === 5 && <h5 className="card-title">Birth Circumstances</h5>}
-                  {i === 6 && <h5 className="card-title">Mortality and Morbidity</h5>}
-                  {indicators.map(row => renderIndicator(row, i < 3))}
+                  { i === 0 && <h5 className="card-title">Pregnancies</h5> }
+                  { i === 1 && <h5 className="card-title">Maternal Health</h5> }
+                  { i === 2 && <h5 className="card-title">Birth Outcomes</h5> }
+                  { i === 3 && <h5 className="card-title">Infant Health and Care</h5> }
+                  {names.map(name => {
+                    const row = indicators.find(r => {
+                      const meta = getIndicatorMeta(r.indicator_id);
+                      return meta && meta.name === name;
+                    });
+                    return row ? renderIndicator(row, i < 3) : null;
+                  })}
                 </div>
               </div>
             </div>
