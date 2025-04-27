@@ -1,4 +1,5 @@
-import { useEffect, useState, useRef, useContext } from 'react';
+import { useEffect, useState, useRef } from 'react';
+// import { useContext } from 'react'; //
 import axios from 'axios';
 import * as d3 from 'd3';
 
@@ -120,7 +121,7 @@ function TrendsCitywide({ indicatorList }) {
       .on("mouseout", function () {
         tooltip.style("opacity", 0);
       });
-  }, [data]);
+  }, [data, indicatorList, selectedIndicatorId]);
 
   if (!indicatorList || !Array.isArray(indicatorList)) {
     return <p>Loading indicator list...</p>;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import ExpandedIndicatorData from '../utils/expanded.indicator.data'
+// import ExpandedIndicatorData from '../utils/expanded.indicator.data'
 
 function MostRecentCitywide({ indicatorList }) {
   const [data, setData] = useState([]);
@@ -13,7 +13,7 @@ function MostRecentCitywide({ indicatorList }) {
         setData(filtered);
       })
       .catch(err => console.error('Error:', err));
-  }, []);
+  }, [indicatorList]);
 
   const getIndicatorMeta = (id) => {
     return indicatorList.find(indicator => indicator.id === String(id));

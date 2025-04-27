@@ -103,7 +103,7 @@ function TrendsByBorough({
       .on("mouseout", function () {
         tooltip.style("visibility", "hidden");
       });
-    }, [trendData]);
+    }, [indicatorList, selectedIndicatorId, trendData]);
 
   useEffect(() => {
     if (!selectedIndicatorId || !selectedBoroughCode) return;
