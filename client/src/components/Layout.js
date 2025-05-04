@@ -1,10 +1,12 @@
 import React from 'react'; // Import React to write a React component
-// import './Layout.css'; // Optional: to style this layout more later with custom CSS
+// import './Layout.css'; // Optional: to style layout more later (not used)
 
-// Layout ("functional component")
+// Layout (layout is a "functional component")
 // "children" = react "prop"
 function Layout({ children, setActiveSection, activeSection }) {
+
   return (
+    
     <div className="d-flex" style={{ height: '100vh', overflow: 'hidden' }}>
       {/* Sidebar section - sticks to the left side */}
       <div
@@ -23,8 +25,10 @@ function Layout({ children, setActiveSection, activeSection }) {
                 Most Recent Data
               </div>
 
-              {/* Sub-links indented using Bootstrap margin start (ms-3) */}
+              {/* ms-3 (bootstrap) indents the sub-sections of Most Recent Data (Citywide & Borough) */}
               <ul className="nav flex-column ms-3">
+
+                {/* Recent Citywide */}
                 <li className="nav-item">
                 <a
                   className={`nav-link ${activeSection === 'recent-citywide' ? 'text-primary fw-bold' : 'text-dark'}`}
@@ -33,7 +37,9 @@ function Layout({ children, setActiveSection, activeSection }) {
                 >
                     Citywide
                 </a>
-                </li>
+                </li> {/* End of Recent Citywide */}
+
+                {/* Recent By Borough */}
                 <li className="nav-item">
                 <a
                   className={`nav-link ${activeSection === 'recent-borough' ? 'text-primary fw-bold' : 'text-dark'}`}
@@ -42,9 +48,11 @@ function Layout({ children, setActiveSection, activeSection }) {
                 >
                     By Borough
                 </a>
-                </li>
+                </li> {/* End of Recent By Borough */}
+
               </ul>
-            </li>
+            </li> {/* End of Most Recent Data */}
+
 
             {/* Data Over Time - non-clickable section title */}
             <li className="nav-item mt-4">
@@ -52,8 +60,10 @@ function Layout({ children, setActiveSection, activeSection }) {
                 Data Over Time
               </div>
 
-              {/* Sub-links for Citywide vs. Borough */}
+              {/* ms-3 (bootstrap) indents the sub-sections of Data Over Time (Citywide & Borough) */}
               <ul className="nav flex-column ms-3">
+
+                {/* Citywide Data Over Time */}
                 <li className="nav-item">
                 <a
                   className={`nav-link ${activeSection === 'trends-city' ? 'text-primary fw-bold' : 'text-dark'}`}
@@ -62,7 +72,9 @@ function Layout({ children, setActiveSection, activeSection }) {
                 >
                     Citywide
                 </a>
-                </li>
+                </li> {/* End of Citywide Data Over Time */}
+
+                {/* Data by Borough Over Time */}
                 <li className="nav-item">
                 <a
                   className={`nav-link ${activeSection === 'trends-borough' ? 'text-primary fw-bold' : 'text-dark'}`}
@@ -71,18 +83,20 @@ function Layout({ children, setActiveSection, activeSection }) {
                 >
                     By Borough
                 </a>
-                </li>
+                </li> {/* End of Data By Borough Over Time */}
+                
               </ul>
-            </li>
+            </li> {/* End of Data Over Time*/}
         </ul>
       </div>
-
-      {/* Main content area where all the dashboard content appears */}
-      {/* "flex-grow-1" makes this take up the rest of the space beside the sidebar - overflow allows main content to scroll*/}
+      
+      {/* MAIN CONTENT AREA where all the dashboard content appears */}
+      {/* "flex-grow-1" makes this take up the rest of the space beside the sidebar; overflowY allows main content to scroll without the sidebar moving */}
       <div className="flex-grow-1 p-4 bg-light" style={{ overflowY: 'auto' }}>
-          {children} {/* This will render whatever content is passed into <Layout> from App.js */}
+        {children} {/* This will render whatever content is passed into <Layout> from App.js */}
           
-          <div>
+        {/* Source note*/}
+        <div>
           <p>
             <br></br>
             Source:{' '}
@@ -93,11 +107,14 @@ function Layout({ children, setActiveSection, activeSection }) {
             <a href="https://fingertips.phe.org.uk/">Public Health Profiles</a>, via{' '}
             <a href="https://fingertips.phe.org.uk/api">Fingertips API</a>
           </p>
-        </div>
-      </div>
+        </div> {/* End of Source note */}
 
-    </div>
-  );
-}
+      </div> {/* End of MAIN CONTENT AREA */}
+
+    </div> // End of return div //
+    
+  ); // End of return //
+
+} // End of function
 
 export default Layout; // Export the Layout component to import and use it in App.js
