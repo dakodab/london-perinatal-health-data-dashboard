@@ -65,6 +65,8 @@ These are example ways someone can run the project locally. (You do **not** need
 
 Deployed on **Railway**. Use environment variables on Railway for any API keys (e.g., MapTiler) so secrets aren’t committed.
 
+**Production:** Deployed from branch `fix/connection-pooling` on Railway.
+
 ---
 
 ## Data Sources & Credits
