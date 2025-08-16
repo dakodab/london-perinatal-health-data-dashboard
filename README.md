@@ -42,6 +42,8 @@ Interactive, multimedia data dashboard exploring perinatal care in London with b
 └─ README.md              # project documentation
 ```
 
+---
+
 ## Getting Started 
 
 **Option A — Node/Express (if `server/` serves the app)**
@@ -51,17 +53,20 @@ Interactive, multimedia data dashboard exploring perinatal care in London with b
 ```
    Visit the printed localhost URL.
 
+---
+
 **Option B — Static server**
 
-Python 3:
+- Python 3:
 ```bash
    python3 -m http.server 8080
    (then open http://localhost:8080)
 ```
-Node via npx:
+- Node via npx:
 ```bash
    npx serve .
 ```
+---
 
 **Option C — VS Code “Live Server” extension** (GUI-based)  
 Install the “Live Server” extension in VS Code, then right-click `index.html` → Open with Live Server.
