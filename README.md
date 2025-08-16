@@ -53,8 +53,6 @@ Interactive, multimedia data dashboard exploring perinatal care in London with b
 ```
    Visit the printed localhost URL.
 
----
-
 **Option B — Static server**
 
 - Python 3:
@@ -66,7 +64,6 @@ Interactive, multimedia data dashboard exploring perinatal care in London with b
 ```bash
    npx serve .
 ```
----
 
 **Option C — VS Code “Live Server” extension** (GUI-based)  
 Install the “Live Server” extension in VS Code, then right-click `index.html` → Open with Live Server.
