@@ -1,6 +1,6 @@
-# London Perinatal (Production)
+# London Perinatal Health Data Dashboard (Production)
 
-Interactive, multimedia article & data visualisation exploring perinatal care in London with borough-level views, maps, and charts.
+Interactive, multimedia data dashboard exploring perinatal care in London with borough-level views, maps, and charts.
 
 **Live site:** https://london-perinatal-production.up.railway.app/#borough
 
