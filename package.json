@@ -10,8 +10,23 @@
     "client": "cd client && npm start",
     "server": "cd server && node index.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "dashboard",
+    "data visualization",
+    "perinatal",
+    "london",
+    "interactive",
+    "multimedia",
+    "healthcare",
+    "maternity",
+    "pregnancy",
+    "neonatal",
+    "birth",
+    "united kingdom",
+    "inequity",
+    "inequality"
+  ],
+  "author": "Dakota Bragato",
   "license": "ISC",
   "description": "Interactive multimedia dashboard exploring perinatal care in London with borough-level data and visualizations.",
   "repository": {
