@@ -2,6 +2,9 @@
 
 Interactive, multimedia data dashboard exploring perinatal care in London with borough-level views, maps, and charts.
 
+<img width="1287" height="708" alt="Image" src="https://github.com/user-attachments/assets/1de7d4fe-e373-4bd2-8a31-2e14b2436cf7" />
+
+
 **Live site:** https://london-perinatal-production.up.railway.app/#borough
 
 ---
@@ -42,6 +45,8 @@ Interactive, multimedia data dashboard exploring perinatal care in London with b
 └─ README.md              # project documentation
 ```
 
+---
+
 ## Getting Started 
 
 **Option A — Node/Express (if `server/` serves the app)**
@@ -53,12 +58,12 @@ Interactive, multimedia data dashboard exploring perinatal care in London with b
 
 **Option B — Static server**
 
-Python 3:
+- Python 3:
 ```bash
    python3 -m http.server 8080
    (then open http://localhost:8080)
 ```
-Node via npx:
+- Node via npx:
 ```bash
    npx serve .
 ```
