@@ -1,5 +1,5 @@
 {
-  "name": "live-dashboard",
+  "name": "london-perinatal-health-data-dashboard",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,15 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "Interactive multimedia dashboard exploring perinatal care in London with borough-level data and visualizations.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dakodab/london-perinatal-health-data-dashboard.git"
+  }, 
+  "bugs": {
+    "url": "https://github.com/dakodab/london-perinatal-health-data-dashboard/issues"
+  },
+  "homepage": "https://github.com/dakodab/london-perinatal-health-data-dashboard#readme",
   "devDependencies": {
     "concurrently": "^9.1.2",
     "npm-run-all": "^4.1.5"
