@@ -1,5 +1,5 @@
 {
-  "name": "live-dashboard",
+  "name": "london-perinatal-health-data-dashboard",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -8,13 +8,35 @@
     "install:server": "cd server && npm install",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "client": "cd client && npm start",
-    "server": "cd server && node index.js",
-    "start": "cd server && npm install && node index.js"
+    "server": "cd server && node index.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "dashboard",
+    "data visualization",
+    "perinatal",
+    "london",
+    "interactive",
+    "multimedia",
+    "healthcare",
+    "maternity",
+    "pregnancy",
+    "neonatal",
+    "birth",
+    "united kingdom",
+    "inequity",
+    "inequality"
+  ],
+  "author": "Dakota Bragato",
   "license": "ISC",
-  "description": "",
+  "description": "Interactive multimedia dashboard exploring perinatal care in London with borough-level data and visualizations.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dakodab/london-perinatal-health-data-dashboard.git"
+  }, 
+  "bugs": {
+    "url": "https://github.com/dakodab/london-perinatal-health-data-dashboard/issues"
+  },
+  "homepage": "https://github.com/dakodab/london-perinatal-health-data-dashboard#readme",
   "devDependencies": {
     "concurrently": "^9.1.2",
     "npm-run-all": "^4.1.5"
